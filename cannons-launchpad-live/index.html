@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FF6B1A">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2226%22 font-size=%2226%22>&#9918;</text></svg>">
+<style>:root{color-scheme:light}html,body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cannon’s Launchpad</title>
+<meta name="description" content="Cannon is 9. Baseball, football, a rocket you can launch, and 25 photos. Throws hard. Dreams big.">
+<meta property="og:title" content="Cannon’s Launchpad">
+<meta property="og:description" content="Cannon is 9. Baseball, football, a rocket you can launch, and 25 photos. Throws hard. Dreams big.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Nunito:wght@400;700;900&display=swap">
+<style id="css">
+/* ==========================================================
+   CANNON'S LAUNCHPAD  -  CSS = the paint.
+   ========================================================== */
+:root{
+  --paper:#FFF8F2;     /* page background */
+  --ink:#111111;       /* black */
+  --orange:#FF6B1A;    /* THE orange */
+  --orange-dk:#D4520C; /* darker orange, for the button shadow */
+  --soft:#6B625B;      /* quieter writing */
+  --box:#FFFFFF;       /* boxes */
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--paper);background-image:linear-gradient(rgba(17,17,17,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(17,17,17,.045) 1px,transparent 1px);background-size:28px 28px;color:var(--ink);font-family:Nunito,"Segoe UI",system-ui,sans-serif;font-size:19px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2{font-family:Bungee,Impact,"Arial Black",sans-serif;font-weight:400;margin:0}
+p{margin:0}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+
+/* ---------- mission control strip ---------- */
+.strip{background:var(--ink);color:#fff}
+.strip .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:9px;padding-bottom:9px;font-family:Bungee,Impact,sans-serif;font-size:12px;letter-spacing:.16em}
+.strip .go{display:flex;align-items:center;gap:8px;color:#7CFF8A;white-space:nowrap}
+.strip .dot{width:10px;height:10px;border-radius:50%;background:#39FF5A;box-shadow:0 0 10px #39FF5A;animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.2}}
+
+/* ---------- TOP: the name, then the launch pad ---------- */
+.top{padding:36px 0 34px;border-bottom:4px solid var(--ink)}
+.name{font-size:clamp(54px, 15vw, 170px);line-height:.95;letter-spacing:.01em;color:var(--orange);display:flex}
+.name span{display:inline-block;animation:popin .6s cubic-bezier(.2,1.5,.4,1) both;animation-delay:calc(var(--i) * 70ms);transition:transform .15s}
+.name span:hover{transform:translateY(-10px) rotate(-5deg)}
+@keyframes popin{from{transform:translateY(50px) scale(.5);opacity:0}}
+.name .o{color:var(--ink)}          /* the second-to-last letter: black */
+.tagline{margin-top:14px;font-family:Bungee,Impact,sans-serif;font-size:clamp(18px, 3.2vw, 30px);letter-spacing:.04em;color:var(--ink);animation:popin .6s cubic-bezier(.2,1.5,.4,1) both;animation-delay:.5s}
+.tagline em{font-style:normal;color:var(--orange)}
+
+/* the launch pad: a big box under the name */
+.scene{position:relative;width:100%;height:380px;margin-top:22px;border:4px solid var(--ink);border-radius:14px;overflow:hidden;box-shadow:8px 8px 0 var(--orange);
+  background:linear-gradient(rgba(255,107,26,.09) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,rgba(255,107,26,.09) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(#FFFFFF,#FFF1E6)}
+.scene.shake{animation:shake .45s}
+@keyframes shake{10%,90%{transform:translate(-2px,0)}20%,80%{transform:translate(3px,0)}30%,50%,70%{transform:translate(-5px,1px)}40%,60%{transform:translate(5px,-1px)}}
+.scene .label{position:absolute;top:12px;left:16px;font-family:Bungee,Impact,sans-serif;font-size:11px;letter-spacing:.18em;color:var(--orange);opacity:.8}
+.scene .ground{position:absolute;left:0;right:0;bottom:0;height:16px;background:repeating-linear-gradient(-45deg,var(--ink) 0 10px,var(--orange) 10px 20px)}
+.scene .count{position:absolute;top:10px;right:18px;font-family:Bungee,Impact,sans-serif;font-size:64px;color:var(--orange);line-height:1}
+.scene .count.pop{animation:pop .35s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{from{transform:scale(2);opacity:0}}
+.scene .star{position:absolute;width:10px;height:10px;background:var(--orange);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);opacity:.7}
+#rk{position:absolute;left:calc(50% - 22px);bottom:16px;width:44px;height:114px}
+#rocket{display:block;width:100%}
+#rocket.rumble{animation:rumble .12s infinite}
+@keyframes rumble{0%{transform:translate(0,0)}25%{transform:translate(-2px,1px)}50%{transform:translate(2px,-1px)}75%{transform:translate(-1px,-2px)}100%{transform:translate(1px,1px)}}
+#flame{opacity:0;transform-origin:12px 44px}
+#rocket.rumble #flame,#rocket.on #flame{opacity:1;animation:flicker .08s infinite alternate}
+@keyframes flicker{from{transform:scaleY(.7)}to{transform:scaleY(1.3)}}
+.puff{position:absolute;border-radius:50%;background:#A8A29C;opacity:.7;pointer-events:none;animation:puff .9s ease-out forwards}
+@keyframes puff{to{transform:scale(2.4);opacity:0}}
+
+.launchrow{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:22px}
+.launch{
+  font-family:Bungee,Impact,sans-serif;font-size:28px;letter-spacing:.04em;min-width:260px;
+  background:var(--orange);color:#fff;border:0;border-radius:10px;padding:18px 36px;
+  box-shadow:0 6px 0 var(--orange-dk);transition:transform .06s, box-shadow .06s;
+}
+.launch:hover{filter:brightness(1.05)}
+.launch:active{transform:translateY(5px);box-shadow:0 1px 0 var(--orange-dk)}
+.launch:disabled{opacity:.6;cursor:wait;transform:none}
+.readout{font-family:Bungee,Impact,sans-serif;font-size:15px;letter-spacing:.14em;color:var(--ink);min-height:1.4em}
+
+/* ---------- ABOUT ME: little boxes ---------- */
+section{padding:36px 0 10px}
+h2{font-size:clamp(22px, 3.2vw, 30px);color:var(--orange);margin-bottom:16px}
+.facts{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:16px}
+.facts li{position:relative;overflow:hidden;background:var(--box);border:3px solid var(--ink);border-radius:12px;padding:16px 18px 18px;font-weight:700;font-size:20px;box-shadow:6px 6px 0 var(--orange);transition:transform .15s, box-shadow .15s}
+/* a soft circle in the corner instead of an emoji */
+.facts li::after{content:"";position:absolute;right:-30px;bottom:-30px;width:78px;height:78px;border-radius:50%;background:var(--orange);opacity:.1}
+.facts li:hover{transform:translate(-2px,-5px);box-shadow:10px 11px 0 var(--orange)}
+.facts li span{display:block;font-family:Bungee,Impact,sans-serif;font-size:11px;letter-spacing:.16em;color:var(--orange);margin-bottom:6px;padding-bottom:6px;border-bottom:2px solid rgba(255,107,26,.3)}
+/* the loud cards */
+.facts li b{display:block;font-family:Bungee,Impact,sans-serif;font-weight:400;font-size:clamp(56px, 9vw, 80px);line-height:.9;margin-top:4px}
+.facts li.pop{background:var(--orange);color:#fff;box-shadow:6px 6px 0 var(--ink)}
+.facts li.pop span{color:#fff;border-bottom-color:rgba(255,255,255,.45)}
+.facts li.pop::after{background:#fff;opacity:.18}
+.facts li.pop:hover{box-shadow:10px 11px 0 var(--ink)}
+.facts li.dark{background:var(--ink);color:#fff}
+.facts li.dark span{color:var(--orange);border-bottom-color:rgba(255,107,26,.45)}
+.facts li.dark::after{opacity:.22}
+.facts li.wide{grid-column:span 2}
+@media (max-width:620px){.facts li.wide{grid-column:auto}}
+.hint{color:var(--soft);font-size:16px;font-weight:700;margin:-8px 0 16px}
+
+/* ---------- STUFF I BUILT ---------- */
+.built{background:var(--box);border:3px solid var(--ink);border-radius:12px;padding:22px 24px 26px;box-shadow:6px 6px 0 var(--orange);display:grid;gap:12px;justify-items:start;position:relative;overflow:hidden}
+.built::after{content:"";position:absolute;right:-40px;bottom:-40px;width:150px;height:150px;border-radius:50%;background:var(--orange);opacity:.09}
+.built-eyebrow{font-family:Bungee,Impact,sans-serif;font-size:11px;letter-spacing:.16em;color:var(--orange)}
+.built-name{font-family:Bungee,Impact,sans-serif;font-size:clamp(30px,6.4vw,54px);line-height:.95;color:var(--ink)}
+.built-text{color:var(--soft);font-weight:700;font-size:17px;max-width:58ch;position:relative}
+a.launch{display:inline-block;text-decoration:none;text-align:center}
+.built-go{margin-top:6px;position:relative}
+
+/* ---------- PHOTOS ---------- */
+.photos{border-top:4px solid var(--ink);margin-top:44px;padding-bottom:70px}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:16px}
+.ph{position:relative;margin:0;background:var(--box);border:3px solid var(--ink);border-radius:12px;overflow:hidden;aspect-ratio:3/4;box-shadow:6px 6px 0 var(--orange)}
+.ph-btn{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.ph-btn:hover img{transform:scale(1.07) rotate(-1.5deg)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}
+.empty{border:3px dashed var(--ink);border-radius:12px;padding:34px 20px;text-align:center;color:var(--soft);font-weight:700}
+/* full-screen photo viewer */
+[hidden]{display:none!important}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(12,9,6,.94);display:flex;align-items:center;justify-content:center;padding:18px}
+.lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:10px;box-shadow:0 24px 70px rgba(0,0,0,.7)}
+.lb-x{position:fixed;top:16px;right:16px;z-index:101;width:58px;height:58px;border-radius:50%;border:3px solid #fff;background:var(--orange);color:#fff;font-family:Bungee,Impact,sans-serif;font-size:26px;line-height:1;box-shadow:0 4px 0 var(--orange-dk)}
+.lb-x:active{transform:translateY(3px);box-shadow:0 1px 0 var(--orange-dk)}
+.lb-nav{position:fixed;top:50%;z-index:101;width:54px;height:54px;margin-top:-27px;border-radius:50%;border:3px solid #fff;background:var(--orange);color:#fff;font-family:Bungee,Impact,sans-serif;font-size:22px;line-height:1;box-shadow:0 4px 0 var(--orange-dk)}
+.lb-nav:active{transform:translateY(3px);box-shadow:0 1px 0 var(--orange-dk)}
+.lb-prev{left:16px}.lb-next{right:16px}
+.lb-count{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:101;color:#fff;font-family:Bungee,Impact,sans-serif;font-size:14px;letter-spacing:.16em}
+@media (max-width:640px){.lb-nav{width:46px;height:46px;margin-top:-23px;font-size:18px}.lb-prev{left:8px}.lb-next{right:8px}}
+
+/* the secret screen (click the C four times) */
+.secret{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:18px;
+  background-color:var(--paper);background-image:linear-gradient(rgba(17,17,17,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(17,17,17,.045) 1px,transparent 1px);background-size:28px 28px}
+.secret-box{width:min(440px,100%);background:var(--box);border:4px solid var(--ink);border-radius:14px;padding:30px 26px;text-align:center;box-shadow:10px 10px 0 var(--orange)}
+.secret-box.shake{animation:shake .45s}
+.secret-eyebrow{font-family:Bungee,Impact,sans-serif;font-size:12px;letter-spacing:.2em;color:var(--orange);margin-bottom:6px}
+.secret-title{font-size:clamp(24px, 4vw, 34px);color:var(--ink);margin-bottom:18px}
+.secret-input{display:block;width:100%;font-family:Bungee,Impact,sans-serif;font-size:30px;letter-spacing:.3em;text-align:center;padding:12px 10px;border:3px solid var(--ink);border-radius:10px;background:#fff;color:var(--ink);margin-bottom:14px}
+.secret-input:focus{outline:3px solid var(--orange);outline-offset:2px}
+.secret-go{width:100%;min-width:0}
+.secret-msg{margin-top:14px;font-family:Bungee,Impact,sans-serif;font-size:13px;letter-spacing:.14em;color:var(--orange);min-height:1.4em}
+.secret-text{color:var(--soft);font-weight:700}
+a.secret-go{display:block;text-decoration:none;text-align:center;margin-top:16px}
+.secret-small{margin-top:12px;font-size:14px;color:var(--soft);font-weight:700}
+
+/* the video, full screen, after the scan */
+.vid{position:fixed;inset:0;z-index:130;background:#000;display:flex;align-items:center;justify-content:center}
+.vid video{width:100%;height:100%;object-fit:contain;display:block;background:#000}
+.vid-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);min-width:0}
+.vid-play:active{transform:translate(-50%,-50%) translateY(5px)}
+
+/* the scan: green light sweeps the whole screen */
+.scan{position:absolute;inset:0;overflow:hidden;--scan:#39FF5A}
+.scan::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(57,255,90,.14) 1px,transparent 1px) 0 0/28px 28px,linear-gradient(90deg,rgba(57,255,90,.14) 1px,transparent 1px) 0 0/28px 28px}
+.scan-line{position:absolute;left:0;right:0;top:-10px;height:6px;background:var(--scan);box-shadow:0 0 18px 6px rgba(57,255,90,.65),0 0 70px 24px rgba(57,255,90,.25);animation:sweep 1.3s ease-in-out 2 alternate both}
+@keyframes sweep{from{top:-10px}to{top:calc(100% - 6px)}}
+.scan-frame{position:absolute;left:50%;top:50%;width:min(72vw,540px);height:min(58vh,540px);transform:translate(-50%,-50%)}
+.scan-frame i{position:absolute;width:46px;height:46px;border:5px solid var(--scan);filter:drop-shadow(0 0 8px rgba(57,255,90,.8))}
+.scan-frame i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0}
+.scan-frame i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0}
+.scan-frame i:nth-child(3){left:0;bottom:0;border-right:0;border-top:0}
+.scan-frame i:nth-child(4){right:0;bottom:0;border-left:0;border-top:0}
+.scan-text{position:absolute;left:50%;bottom:14%;transform:translateX(-50%);white-space:nowrap;font-family:Bungee,Impact,sans-serif;font-size:clamp(16px, 4vw, 34px);letter-spacing:.2em;color:#1a9a33;text-shadow:0 0 14px rgba(57,255,90,.7);animation:blink .8s infinite}
+
+footer{border-top:4px solid var(--ink);padding:24px 0 60px;color:var(--soft);font-size:16px}
+footer .wrap{display:grid;gap:4px}
+.foot-name{font-family:Bungee,Impact,sans-serif;font-size:clamp(18px, 3vw, 24px);color:var(--orange);letter-spacing:.04em;margin-bottom:6px}
+
+@media (prefers-reduced-motion:reduce){
+  #rocket.rumble,#rocket.rumble #flame,#rocket.on #flame,.puff,.name span,.tagline,.strip .dot,.scene.shake,.scene .count.pop,.secret-box.shake,.scan-text{animation:none}
+  .scan-line{animation-duration:.01s}
+  .ph img,.facts li,.name span{transition:none}
+}
+</style>
+
+<div id="app"></div>
+<script id="photos-data" type="application/json">[{"id":"71379ae073069355e1d28b124e611315","url":"photos/71379ae073069355e1d28b124e611315.jpg","pos":"25% 50%"},{"id":"7b7d13aba1fc1e2e1f4b59ef0f94efe9","url":"photos/7b7d13aba1fc1e2e1f4b59ef0f94efe9.jpg"},{"id":"8b6bd1741117cda9e07a35906b656883","url":"photos/8b6bd1741117cda9e07a35906b656883.jpg","pos":"50% 0%"},{"id":"88ec7e2b73a8062559152b2f428c4460","url":"photos/88ec7e2b73a8062559152b2f428c4460.jpg"},{"id":"ffa996c244f01805b37a141409fb37bc","url":"photos/ffa996c244f01805b37a141409fb37bc.jpg"},{"id":"750b8d5abd90aebb29bc7fa4496966db","url":"photos/750b8d5abd90aebb29bc7fa4496966db.jpg"},{"id":"b03e33009b7c8cfe0bf9027f31e2647d","url":"photos/b03e33009b7c8cfe0bf9027f31e2647d.jpg"},{"id":"c6f0fba0ad9563a816e41cdf412320f3","url":"photos/c6f0fba0ad9563a816e41cdf412320f3.jpg"},{"id":"93c62bbedacda54cee3649fa44ef263e","url":"photos/93c62bbedacda54cee3649fa44ef263e.jpg"},{"id":"18955cca69632e5c579d2f53204fdccb","url":"photos/18955cca69632e5c579d2f53204fdccb.jpg"},{"id":"582da8d1a19464fcc96dfa4ab923c7af","url":"photos/582da8d1a19464fcc96dfa4ab923c7af.jpg"},{"id":"61b3afb13048fd96af3a53b521725906","url":"photos/61b3afb13048fd96af3a53b521725906.jpg"},{"id":"6b23069e4c0e07dad41ecc8bacbf2e3b","url":"photos/6b23069e4c0e07dad41ecc8bacbf2e3b.jpg"},{"id":"247c58663ad5cdb4bed672f1fb969976","url":"photos/247c58663ad5cdb4bed672f1fb969976.jpg"},{"id":"83ae1f93567a143711d3a38e141e4904","url":"photos/83ae1f93567a143711d3a38e141e4904.jpg"},{"id":"d766b5bebb8a4442c0ca915ee6eee163","url":"photos/d766b5bebb8a4442c0ca915ee6eee163.jpg"},{"id":"729208200afa8b9a6d12499ea0a86a1a","url":"photos/729208200afa8b9a6d12499ea0a86a1a.jpg"},{"id":"fe234dea3754e786ad912a9499bcc621","url":"photos/fe234dea3754e786ad912a9499bcc621.jpg"},{"id":"e00d16e1a3c545599e3d5ef6b0ee0cab","url":"photos/e00d16e1a3c545599e3d5ef6b0ee0cab.jpg"},{"id":"53b118680ac5f258c4aa553beb161bce","url":"photos/53b118680ac5f258c4aa553beb161bce.jpg"},{"id":"5ad06db282e621654798ee427f4e8a84","url":"photos/5ad06db282e621654798ee427f4e8a84.jpg"},{"id":"86b2cdf405f1cee5dde262cd5c7bca9c","url":"photos/86b2cdf405f1cee5dde262cd5c7bca9c.jpg","pos":"50% 0%"},{"id":"e0296c8c5ff4ad5f2001545e2824debe","url":"photos/e0296c8c5ff4ad5f2001545e2824debe.jpg"},{"id":"e7edf8450bbde269dd686f8f4e051bfa","url":"photos/e7edf8450bbde269dd686f8f4e051bfa.jpg"},{"id":"8ff560c34635e7b835809400714b25c5","url":"photos/8ff560c34635e7b835809400714b25c5.jpg"}]</script>
+<script>
+/* ==========================================================
+   JavaScript = the BRAIN. It draws the page from the photo list,
+   makes the rocket fly, and opens photos full screen.
+   ========================================================== */
+const $ = s => document.querySelector(s);
+const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+let PHOTOS = [];
+try { PHOTOS = JSON.parse(document.getElementById('photos-data').textContent) || []; } catch (e) {}
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+
+const ROCKET = `<svg id="rocket" viewBox="0 0 24 62" aria-hidden="true">
+  <path id="flame" d="M12 44 L17 54 L12 62 L7 54 Z" fill="#FF6B1A"/>
+  <path d="M12 2 C17 10 19 20 19 30 L19 44 L5 44 L5 30 C5 20 7 10 12 2 Z" fill="#F3F3F3" stroke="#111" stroke-width="1.6"/>
+  <path d="M5 32 L1 44 L5 44 Z" fill="#FF6B1A" stroke="#111" stroke-width="1.2"/>
+  <path d="M19 32 L23 44 L19 44 Z" fill="#FF6B1A" stroke="#111" stroke-width="1.2"/>
+  <circle cx="12" cy="22" r="4" fill="#111"/>
+  <circle cx="12" cy="22" r="2.2" fill="#9ED8FF"/>
+</svg>`;
+
+/* The whole page, written out once. */
+function page(photos){
+  return `
+<div class="strip"><div class="wrap"><span>Cannon’s Launchpad</span><span class="go"><span class="dot"></span>Systems go</span></div></div>
+<header class="top"><div class="wrap">
+  <h1 class="name" aria-label="Cannon"><span style="--i:0">C</span><span style="--i:1">A</span><span style="--i:2">N</span><span style="--i:3">N</span><span class="o" style="--i:4">O</span><span style="--i:5">N</span></h1>
+  <p class="tagline">Throws hard. <em>Dreams big.</em></p>
+  <div class="scene" id="scene" aria-hidden="true">
+    <div class="label">Launch pad 01</div>
+    <div class="count" id="count"></div>
+    <i class="star" style="left:12%;top:18%"></i><i class="star" style="left:30%;top:60%"></i><i class="star" style="left:72%;top:30%"></i><i class="star" style="left:88%;top:62%"></i><i class="star" style="left:52%;top:12%"></i>
+    <div id="rk">${ROCKET}</div>
+    <div class="ground"></div>
+  </div>
+  <div class="launchrow">
+    <button class="launch" id="launchBtn">LAUNCH</button>
+    <div class="readout" id="readout" aria-live="polite">READY</div>
+  </div>
+</div></header>
+
+<main>
+  <section><div class="wrap">
+    <h2>About me</h2>
+    <ul class="facts">
+      <li><span>Name</span>Cannon</li>
+      <li><span>Age</span><b>9</b></li>
+      <li class="pop"><span>My jersey number</span><b>6</b></li>
+      <li class="dark wide"><span>Dream job</span>MLB baseball player</li>
+      <li><span>Favorite team</span>Tampa Bay Rays</li>
+      <li><span>Favorite player</span>Junior Caminero</li>
+      <li><span>Favorite sports</span>Baseball and football</li>
+      <li><span>Baseball position</span>First base, pitcher, and outfield</li>
+      <li><span>Football position</span>Offensive line, defensive line, and QB</li>
+      <li class="pop wide"><span>Best sports moment</span>Winning the championship with my 10U Swag team</li>
+      <li class="wide"><span>I’m into</span>Rockets, engineering, AI, video games, and sports</li>
+      <li><span>Also into</span>Snowboarding, dirt bikes, golf, skateboarding</li>
+      <li><span>Favorite food</span>Steak, medium rare</li>
+      <li><span>Favorite video game</span>Spider-Man 2</li>
+      <li><span>Favorite movie</span>Sonic the Hedgehog 3</li>
+      <li><span>Superpower I’d pick</span>Super speed</li>
+    </ul>
+  </div></section>
+
+  <section><div class="wrap">
+    <h2>Stuff I built</h2>
+    <div class="built">
+      <p class="built-eyebrow">My app</p>
+      <p class="built-name">BANK OF CANNON</p>
+      <p class="built-text">My own banking app, and I actually use it &mdash; this is my real money in here. Two jars, Spend and Save. A list of everybody who owes me money. A savings goal that tells me how many weeks I have left. And a chart of what I gained and lost every month of the year.</p>
+      <a class="launch built-go" href="bank/" target="_blank" rel="noopener">OPEN MY BANK</a>
+    </div>
+  </div></section>
+
+  <section class="photos"><div class="wrap">
+    <h2>Gallery</h2>
+    <div class="gal" id="gal">${photos.length
+      ? photos.map((p, i) => `<figure class="ph"><button class="ph-btn" data-i="${i}" aria-label="See photo ${i + 1} full screen"><img src="${esc(p.url)}" alt="Photo ${i + 1}" loading="lazy"${p.pos ? ` style="object-position:${esc(p.pos)}"` : ''}></button></figure>`).join('')
+      : '<div class="empty">No photos yet.</div>'}</div>
+  </div></section>
+</main>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo, full screen">
+  <button class="lb-x" id="lbX" aria-label="Close">X</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous photo">&lt;</button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next photo">&gt;</button>
+  <img id="lbImg" alt="">
+  <div class="lb-count" id="lbCount"></div>
+</div>
+
+<div class="secret" id="secret" hidden role="dialog" aria-modal="true" aria-label="Secret area">
+  <button class="lb-x" id="secretX" aria-label="Close">X</button>
+  <div class="secret-box" id="secretBox">
+    <div id="secretLocked">
+      <p class="secret-eyebrow">Secret area</p>
+      <h2 class="secret-title">Enter password</h2>
+      <form id="secretForm" autocomplete="off">
+        <input id="secretCode" class="secret-input" type="password" inputmode="numeric" autocomplete="off" aria-label="Password" maxlength="12">
+        <button class="launch secret-go" type="submit">ENTER</button>
+      </form>
+      <p class="secret-msg" id="secretMsg" aria-live="polite"></p>
+    </div>
+    <div id="secretOpen" hidden>
+      <p class="secret-eyebrow">Access granted</p>
+      <h2 class="secret-title">Welcome, Cannon.</h2>
+      <p class="secret-text">The video couldn’t play here, so here’s the backup.</p>
+      <a class="launch secret-go" id="videoLink" href="#" target="_blank" rel="noopener">OPEN THE VIDEO</a>
+      <p class="secret-small">It opens on tbwater.com at the 26-second mark.</p>
+    </div>
+  </div>
+  <div class="scan" id="secretScan" hidden aria-hidden="true">
+    <div class="scan-line"></div>
+    <div class="scan-frame"><i></i><i></i><i></i><i></i></div>
+    <p class="scan-text" id="scanText">SCANNING…</p>
+  </div>
+</div>
+
+<div class="vid" id="secretVid" hidden role="dialog" aria-modal="true" aria-label="Video">
+  <video id="secretVideo" playsinline preload="auto"></video>
+  <button class="launch vid-play" id="vidPlay" hidden>PLAY</button>
+  <button class="lb-x" id="vidX" aria-label="Close video">X</button>
+</div>
+
+<footer><div class="wrap">
+  <p class="foot-name">Cannon’s Launchpad</p>
+  <p>Built by Cannon with his big brother Christian, and an AI helper.</p>
+  <p>Made for his friends. Especially Zach. 2026.</p>
+</div></footer>`;
+}
+
+function render(){
+  document.getElementById('app').innerHTML = page(PHOTOS);
+  wireLaunch();
+  wireGallery();
+  wireSecret();
+}
+
+/* ---------- the secret: click the C four times (fast), then the password ---------- */
+const SECRET_CODE = '123567';
+/* Dad's video. The copy saved on this site is already cut to start at the 26-second mark,
+   so it plays from its own beginning. The backup link opens the full video on dad's site at that mark. */
+const VIDEO_AT = 26;
+const VIDEO_SRC = 'media/c5e6e85c8040cf86b652ee80b2054074.mp4';                       /* the 4-second clip, saved on this site */
+const VIDEO_URL = 'https://tbwater.com/public/videos/tbwater-homepage-video.mp4'; /* the backup, on dad's site */
+function wireSecret(){
+  const c = document.querySelector('.name span');
+  const sec = $('#secret'), box = $('#secretBox'), form = $('#secretForm'), input = $('#secretCode'), msg = $('#secretMsg');
+  const scan = $('#secretScan'), scanText = $('#scanText'), xBtn = $('#secretX'), link = $('#videoLink');
+  const vid = $('#secretVid'), v = $('#secretVideo'), playBtn = $('#vidPlay');
+  const videoHref = VIDEO_URL + '#t=' + VIDEO_AT;
+  link.href = videoHref;
+  let clicks = 0, last = 0, timers = [];
+  function openSecret(){
+    timers.forEach(clearTimeout); timers = [];
+    $('#secretLocked').hidden = false; $('#secretOpen').hidden = true; scan.hidden = true; box.hidden = false; xBtn.hidden = false;
+    input.value = ''; msg.textContent = '';
+    sec.hidden = false; document.body.style.overflow = 'hidden';
+    timers.push(setTimeout(() => input.focus(), 60));
+  }
+  function closeSecret(){ timers.forEach(clearTimeout); timers = []; sec.hidden = true; document.body.style.overflow = ''; }
+  function runScan(){
+    /* 1. hide everything but the background, 2. sweep the green light twice, 3. open the video */
+    box.hidden = true; xBtn.hidden = true;
+    scanText.textContent = 'SCANNING…';
+    scan.hidden = false;
+    const line = scan.querySelector('.scan-line'); line.style.animation = 'none'; void line.offsetWidth; line.style.animation = '';
+    const step = calm ? 300 : 1300;
+    timers.push(setTimeout(() => { scanText.textContent = 'CANNON DETECTED'; }, step));
+    timers.push(setTimeout(() => { scanText.textContent = 'ACCESS GRANTED'; }, step * 2));
+    timers.push(setTimeout(playVideo, step * 2 + 700));
+  }
+  function playVideo(){
+    scan.hidden = true;
+    vid.hidden = false; playBtn.hidden = true;
+    v.src = VIDEO_SRC;
+    v.load();
+  }
+  const tryPlay = () => v.play().then(() => { playBtn.hidden = true; }).catch(() => { playBtn.hidden = false; playBtn.focus(); });
+  v.addEventListener('loadedmetadata', tryPlay);
+  playBtn.addEventListener('click', tryPlay);
+  function finishVideo(){
+    /* the video is over: back to the normal page, right at the top */
+    v.pause(); v.removeAttribute('src'); v.load();
+    vid.hidden = true; closeSecret();
+    window.scrollTo(0, 0);
+  }
+  v.addEventListener('ended', finishVideo);
+  $('#vidX').addEventListener('click', finishVideo);
+  v.addEventListener('error', () => {
+    /* the saved copy couldn't play: show the backup button instead */
+    if (vid.hidden) return;
+    vid.hidden = true; box.hidden = false; xBtn.hidden = false;
+    $('#secretLocked').hidden = true; $('#secretOpen').hidden = false; link.focus();
+  });
+  c.addEventListener('click', () => {
+    const now = Date.now();
+    if (now - last > 2000) clicks = 0;      /* too slow? start over */
+    last = now; clicks++;
+    if (clicks >= 4){ clicks = 0; openSecret(); }
+  });
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (input.value.trim() === SECRET_CODE){
+      runScan();
+    } else {
+      msg.textContent = 'Wrong password. Try again.';
+      box.classList.remove('shake'); void box.offsetWidth; box.classList.add('shake');
+      input.value = ''; input.focus();
+    }
+  });
+  $('#secretX').addEventListener('click', closeSecret);
+  addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (!vid.hidden) finishVideo(); else if (!sec.hidden) closeSecret();
+  });
+}
+
+/* ---------- the rocket: four goofy flight paths, picked at random ---------- */
+const FLIGHTS = [
+  { name: 'WOBBLY LIFTOFF', dur: 2300, frames: [
+    { transform: 'translate(0,0) rotate(0deg)' },
+    { transform: 'translate(-40px,-90px) rotate(-18deg)', offset: .2 },
+    { transform: 'translate(45px,-180px) rotate(20deg)', offset: .4 },
+    { transform: 'translate(-45px,-270px) rotate(-20deg)', offset: .6 },
+    { transform: 'translate(40px,-380px) rotate(15deg)', offset: .8 },
+    { transform: 'translate(0,-620px) rotate(0deg)' } ] },
+  { name: 'LOOP-DE-LOOP!', dur: 3000, frames: [
+    { transform: 'translate(0,0) rotate(0deg)' },
+    { transform: 'translate(0,-130px) rotate(0deg)', offset: .15 },
+    { transform: 'translate(0,-130px) rotate(90deg)', offset: .22 },
+    { transform: 'translate(70px,-200px) rotate(0deg)', offset: .34 },
+    { transform: 'translate(0,-270px) rotate(-90deg)', offset: .46 },
+    { transform: 'translate(-70px,-200px) rotate(-180deg)', offset: .58 },
+    { transform: 'translate(0,-130px) rotate(-270deg)', offset: .7 },
+    { transform: 'translate(70px,-200px) rotate(-360deg)', offset: .8 },
+    { transform: 'translate(0,-620px) rotate(-360deg)' } ] },
+  { name: 'TOTAL SPIN-OUT', dur: 2400, frames: [
+    { transform: 'translate(0,0) rotate(0deg)' },
+    { transform: 'translate(0,-110px) rotate(0deg)', offset: .3 },
+    { transform: 'translate(60px,-190px) rotate(200deg)', offset: .5 },
+    { transform: 'translate(-40px,-300px) rotate(560deg)', offset: .7 },
+    { transform: 'translate(120px,-640px) rotate(980deg)' } ] },
+  { name: 'BONK. THEN LIFTOFF.', dur: 3300, frames: [
+    { transform: 'translate(0,0) rotate(0deg)' },
+    { transform: 'translate(0,-250px) rotate(0deg)', offset: .2 },
+    { transform: 'translate(2px,-238px) rotate(4deg)', offset: .24 },
+    { transform: 'translate(8px,-120px) rotate(28deg)', offset: .4 },
+    { transform: 'translate(-4px,0) rotate(-8deg)', offset: .55 },
+    { transform: 'translate(0,-34px) rotate(0deg)', offset: .62 },
+    { transform: 'translate(0,0) rotate(0deg)', offset: .7 },
+    { transform: 'translate(0,0) rotate(0deg)', offset: .8 },
+    { transform: 'translate(0,-620px) rotate(0deg)' } ] },
+  { name: 'ZIGZAG!', dur: 2200, frames: [
+    { transform: 'translate(0,0) rotate(0deg)' },
+    { transform: 'translate(-90px,-70px) rotate(-40deg)', offset: .15 },
+    { transform: 'translate(90px,-140px) rotate(40deg)', offset: .3 },
+    { transform: 'translate(-90px,-210px) rotate(-40deg)', offset: .45 },
+    { transform: 'translate(90px,-280px) rotate(40deg)', offset: .6 },
+    { transform: 'translate(-60px,-350px) rotate(-30deg)', offset: .75 },
+    { transform: 'translate(0,-620px) rotate(0deg)' } ] },
+  { name: 'BACKFLIP!', dur: 2600, frames: [
+    { transform: 'translate(0,0) rotate(0deg)' },
+    { transform: 'translate(0,-120px) rotate(0deg)', offset: .25 },
+    { transform: 'translate(24px,-200px) rotate(-180deg)', offset: .45 },
+    { transform: 'translate(0,-240px) rotate(-360deg)', offset: .62 },
+    { transform: 'translate(0,-620px) rotate(-360deg)' } ] },
+  { name: 'FAKE-OUT.', dur: 3400, frames: [
+    { transform: 'translate(0,0) rotate(0deg)' },
+    { transform: 'translate(0,-60px) rotate(0deg)', offset: .15 },
+    { transform: 'translate(0,0) rotate(0deg)', offset: .3 },
+    { transform: 'translate(0,0) rotate(0deg)', offset: .5 },
+    { transform: 'translate(0,-8px) rotate(0deg)', offset: .55 },
+    { transform: 'translate(0,0) rotate(0deg)', offset: .6 },
+    { transform: 'translate(0,0) rotate(0deg)', offset: .76 },
+    { transform: 'translate(0,-640px) rotate(0deg)' } ] },
+  { name: 'CORKSCREW!', dur: 2800, frames: Array.from({ length: 11 }, (_, k) => {
+    const t = k / 10;
+    return { transform: `translate(${Math.round(80 * Math.sin(t * Math.PI * 4))}px,${Math.round(-640 * t)}px) rotate(${Math.round(38 * Math.sin(t * Math.PI * 4 + Math.PI / 2) * (k ? 1 : 0))}deg)`, offset: t };
+  }) },
+  { name: 'WRONG WAY!', dur: 2200, frames: [
+    { transform: 'translate(0,0) rotate(0deg)' },
+    { transform: 'translate(0,-90px) rotate(0deg)', offset: .25 },
+    { transform: 'translate(40px,-110px) rotate(60deg)', offset: .4 },
+    { transform: 'translate(760px,-120px) rotate(90deg)' } ] },
+  { name: 'HELICOPTER?!', dur: 3000, frames: [
+    { transform: 'translate(0,0) rotate(0deg)' },
+    { transform: 'translate(0,-100px) rotate(540deg)', offset: .4 },
+    { transform: 'translate(0,-180px) rotate(1080deg)', offset: .7 },
+    { transform: 'translate(0,-640px) rotate(1080deg)' } ] },
+];
+function wireLaunch(){
+  const btn = $('#launchBtn'), rk = $('#rk'), rocket = $('#rocket'), out = $('#readout'), cnt = $('#count'), scene = $('#scene');
+  let count = 0, busy = false, last = -1;
+  try { count = parseInt(localStorage.getItem('cannonLaunches') || '0', 10) || 0; } catch (e) {}
+  if (count) out.textContent = 'LAUNCHES: ' + count;
+  const done = label => { out.textContent = 'LAUNCHES: ' + count + (label ? ' · ' + label : ''); btn.disabled = false; busy = false; };
+
+  function puff(){
+    /* a little smoke cloud wherever the rocket is right now, so you can see the path */
+    const s = scene.getBoundingClientRect(), r = rk.getBoundingClientRect();
+    const x = r.left + r.width / 2 - s.left, y = r.bottom - s.top - 16;
+    if (y < -30 || y > s.height + 30) return;
+    const size = 8 + Math.random() * 12, p = document.createElement('div');
+    p.className = 'puff'; p.style.cssText = `left:${x - size / 2}px;top:${y - size / 2}px;width:${size}px;height:${size}px`;
+    scene.appendChild(p); setTimeout(() => p.remove(), 900);
+  }
+  function fly(){
+    let i; do { i = Math.floor(Math.random() * FLIGHTS.length); } while (i === last); last = i;
+    const f = FLIGHTS[i];
+    out.textContent = 'LIFTOFF!'; rocket.classList.add('on');
+    scene.classList.remove('shake'); void scene.offsetWidth; scene.classList.add('shake');
+    const anim = rk.animate(f.frames, { duration: f.dur, easing: 'linear', fill: 'forwards' });
+    const smoke = setInterval(puff, 55);
+    setTimeout(() => {
+      clearInterval(smoke); rocket.classList.remove('on');
+      /* a new rocket rolls up onto the pad */
+      rk.animate([{ transform: 'translate(0,280px)' }, { transform: 'translate(0,0)' }], { duration: 600, easing: 'ease-out' });
+      anim.cancel();
+      setTimeout(() => done(f.name), 650);
+    }, f.dur + 60);
+  }
+  btn.addEventListener('click', () => {
+    if (busy) return;
+    busy = true; btn.disabled = true; count++;
+    try { localStorage.setItem('cannonLaunches', String(count)); } catch (e) {}
+    if (calm || !rk.animate){ out.textContent = 'LIFTOFF!'; setTimeout(() => done(''), 1500); return; }
+    const pop = v => { cnt.textContent = v; cnt.classList.remove('pop'); void cnt.offsetWidth; cnt.classList.add('pop'); };
+    let n = 3; pop(n); out.textContent = 'COUNTING DOWN';
+    const timer = setInterval(() => {
+      n--;
+      if (n > 0){ pop(n); if (n === 1) rocket.classList.add('rumble'); return; }
+      clearInterval(timer); cnt.textContent = ''; rocket.classList.remove('rumble'); fly();
+    }, 750);
+  });
+}
+
+/* ---------- photos: tap one to see it full screen, X (or Esc) to close ---------- */
+function wireGallery(){
+  const lb = $('#lb'), big = $('#lbImg'), x = $('#lbX'), count = $('#lbCount');
+  let opener = null, cur = 0;
+  function show(i){
+    cur = (i + PHOTOS.length) % PHOTOS.length;
+    big.src = PHOTOS[cur].url; big.alt = 'Photo ' + (cur + 1);
+    count.textContent = (cur + 1) + ' / ' + PHOTOS.length;
+  }
+  function open(i, btn){
+    show(i);
+    lb.hidden = false; document.body.style.overflow = 'hidden';   /* page stops scrolling behind it */
+    opener = btn; x.focus();
+  }
+  function close(){
+    lb.hidden = true; big.removeAttribute('src'); document.body.style.overflow = '';
+    if (opener) opener.focus();
+  }
+  $('#gal').addEventListener('click', e => { const b = e.target.closest('.ph-btn'); if (b) open(+b.dataset.i, b); });
+  x.addEventListener('click', close);
+  $('#lbPrev').addEventListener('click', () => show(cur - 1));
+  $('#lbNext').addEventListener('click', () => show(cur + 1));
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  addEventListener('keydown', e => {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(cur - 1);
+    if (e.key === 'ArrowRight') show(cur + 1);
+  });
+  /* swipe left/right on a phone */
+  let sx = null;
+  lb.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; sx = null; if (dx > 50) show(cur - 1); if (dx < -50) show(cur + 1); });
+}
+
+render();
+</script>
+
+</body>
+</html>
