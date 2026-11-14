@@ -1,0 +1,1767 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0A121B">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Bank of Cannon">
+<meta name="application-name" content="Bank of Cannon">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" sizes="512x512" href="icon.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon.png">
+<style>:root{color-scheme:dark}html,body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<script>
+  /* the X goes back next door, and a brand new device starts on Cannon's real numbers */
+  window.__BANK_BACK__ = "../";
+  window.__BANK_SEED__ = {"tx": [{"id": "t1a1d3299cfb", "ts": 1794544082171, "kind": "in", "acct": "save", "amount": 38000, "note": "My money right now"}], "goal": null, "allowance": {"amount": 0, "day": 6, "last": null}, "allowanceOn": false, "rate": 2, "interestMonth": null, "owed": [{"id": "o1a1d3299cfbg", "who": "Garrett", "amount": 2000, "ts": 1794544082171}], "owedJar": "save"};
+</script>
+</head>
+<body>
+<title>Bank of Cannon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600;6..96,700&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;600;700&display=swap">
+<style>
+  :root{
+    color-scheme:dark;
+    --paper:#0A121B;
+    --panel:#121D2A;
+    --panel-2:#17242F;
+    --ink:#E8F0F6;
+    --ink-2:#9FB3C2;
+    --ink-3:#74899A;
+    --rule:rgba(232,240,246,.14);
+    --rule-2:rgba(232,240,246,.28);
+    --guilloche:rgba(170,210,255,.045);
+    --spend:#2A64D0;
+    --save:#35A873;
+    --out:#FF8A7A;
+    --stamp:#6FD3AE;
+    --teal:#5FE0C0;
+    --bar-in:#35A873;
+    --bar-out:#C44A38;
+    --display:"Bodoni Moda",Didot,"Times New Roman",serif;
+    --body:"Public Sans",system-ui,-apple-system,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .safety{
+    position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      repeating-linear-gradient(27deg,var(--guilloche) 0 1px,transparent 1px 9px),
+      repeating-linear-gradient(-27deg,var(--guilloche) 0 1px,transparent 1px 9px);
+  }
+  .sheet{
+    position:relative;z-index:1;
+    max-width:940px;margin:0 auto;padding:26px 18px 60px;
+    display:flex;flex-direction:column;gap:18px;
+  }
+  .divider{
+    display:flex;align-items:center;gap:14px;
+    margin:40px 0 4px;scroll-margin-top:18px;
+  }
+  .divider::before,.divider::after{content:"";height:1.5px;background:var(--rule-2);flex:1}
+  .divider span{
+    font-family:var(--mono);font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--ink-2);flex:none;
+  }
+
+  /* ---------- the way back to the Launchpad ---------- */
+  .backout{
+    display:inline-flex;align-items:center;gap:10px;align-self:flex-start;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-2);text-decoration:none;
+    background:var(--panel);border:1.5px solid var(--rule-2);border-radius:999px;
+    padding:7px 16px 7px 8px;margin-bottom:4px;
+  }
+  .backout .x{
+    display:grid;place-items:center;width:24px;height:24px;flex:none;
+    border-radius:50%;background:var(--panel-2);border:1px solid var(--rule);
+    font-size:17px;line-height:1;color:var(--ink);
+  }
+  .backout:hover{color:var(--teal);border-color:var(--teal)}
+  .backout:hover .x{color:var(--teal)}
+  @media (max-width:420px){.backout span:last-child{display:none}.backout{padding:7px 8px}}
+
+  /* ---------- masthead ---------- */
+  .masthead{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}
+  @media (max-width:520px){
+    .masthead{flex-wrap:nowrap;align-items:flex-start}
+    .mast-right{align-items:flex-end}
+  }
+  .eyebrow{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ink-2);margin:0 0 4px;
+  }
+  h1{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(34px,7.2vw,58px);line-height:.95;letter-spacing:-.01em;
+    margin:0;text-wrap:balance;
+  }
+  .mast-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+  .logo{width:96px;height:96px;flex:none}
+  .logo svg{display:block;width:100%;height:auto}
+  @media (max-width:520px){.logo{width:74px;height:74px}}
+  .saveflag{
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+    color:var(--ink-2);text-align:right;display:flex;align-items:center;gap:7px;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--stamp);flex:none}
+  .hr{height:0;border:none;border-top:1.5px solid var(--rule-2);border-bottom:1px solid var(--rule);margin:0}
+
+  /* ---------- first-run welcome ---------- */
+  .hello{
+    display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+    background:var(--panel-2);border:1.5px dashed var(--rule-2);
+    border-radius:3px;padding:11px 14px;font-size:14.5px;color:var(--ink-2);
+  }
+  .hello strong{color:var(--ink)}
+
+  /* ---------- panels ---------- */
+  .panel{
+    background:var(--panel);border:1.5px solid var(--rule-2);border-radius:3px;
+    padding:16px 18px 18px;display:flex;flex-direction:column;gap:13px;
+  }
+  h2{
+    font-family:var(--body);font-weight:700;font-size:12px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);
+    margin:0;
+  }
+
+  /* ---------- hero balance ---------- */
+  .hero{align-items:flex-start}
+  .total{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(50px,13vw,86px);line-height:.9;letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;margin:0;
+  }
+  .jars{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;width:100%}
+  .jar{
+    background:var(--panel-2);border:1px solid var(--rule);border-radius:3px;
+    border-top:5px solid var(--c);padding:10px 11px 12px;
+    --c:var(--spend);
+  }
+  .jar.save{--c:var(--save)}
+  .jar-name{
+    display:flex;align-items:center;gap:6px;
+    font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--ink-2);margin-bottom:5px;
+  }
+  .swatch{width:9px;height:9px;border-radius:2px;background:var(--c);flex:none}
+  .jar-amt{
+    font-family:var(--mono);font-weight:500;font-size:clamp(17px,4.4vw,22px);
+    font-variant-numeric:tabular-nums;line-height:1.1;
+  }
+  .jar-note{font-size:12px;color:var(--ink-3);margin:3px 0 0}
+
+  .record{font-size:14.5px;color:var(--ink-2);margin:2px 0 0}
+  .record b{font-family:var(--mono);font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+  .rec-flag{
+    display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--stamp);border:1px solid var(--stamp);
+    border-radius:2px;padding:2px 6px;margin-right:8px;vertical-align:2px;
+  }
+
+  /* ---------- chart ---------- */
+  .chart-wrap{position:relative;width:100%}
+  .chart-wrap svg{display:block;width:100%;height:auto;overflow:visible}
+  .tip{
+    position:absolute;z-index:3;pointer-events:none;
+    transform:translate(-50%,-116%);
+    background:var(--panel);border:1.5px solid var(--rule-2);border-radius:3px;
+    padding:7px 9px;min-width:124px;box-shadow:0 4px 14px rgba(0,0,0,.14);
+    font-size:12.5px;line-height:1.35;display:none;
+  }
+  .tip b{font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums}
+  .tip .tdate{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+  .no-chart{font-size:14px;color:var(--ink-3);margin:0;padding:14px 0}
+
+  /* ---------- forms ---------- */
+  .seg{display:flex;gap:0;border:1.5px solid var(--rule-2);border-radius:3px;overflow:hidden}
+  .seg button{
+    flex:1;font-family:var(--body);font-weight:700;font-size:12.5px;
+    letter-spacing:.07em;text-transform:uppercase;
+    color:var(--ink-2);background:var(--panel-2);border:none;
+    border-left:1px solid var(--rule);padding:10px 4px;cursor:pointer;
+  }
+  .seg button:first-child{border-left:none}
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--panel)}
+  .field{display:flex;flex-direction:column;gap:5px}
+  .field label,.lbl{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--ink-2);
+  }
+  input[type=text],input[type=number],select{
+    font-family:var(--body);font-size:16px;color:var(--ink);
+    background:var(--panel-2);border:1.5px solid var(--rule-2);border-radius:3px;
+    padding:10px 11px;width:100%;
+  }
+  input[type=number]{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  input::placeholder{color:var(--ink-3)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .btn{
+    font-family:var(--body);font-weight:700;font-size:14px;
+    letter-spacing:.04em;color:var(--ink);background:var(--panel-2);
+    border:1.5px solid var(--rule-2);border-radius:3px;padding:11px 14px;cursor:pointer;
+  }
+  .btn:hover:not(:disabled){background:var(--paper)}
+  .btn:disabled{opacity:.42;cursor:default}
+  .btn.primary{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+  .btn.primary:hover:not(:disabled){filter:brightness(1.18)}
+  :focus-visible{outline:3px solid var(--spend);outline-offset:2px}
+  .msg{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);margin:0;min-height:1.1em}
+
+  /* ---------- goal ---------- */
+  .goal-name{font-family:var(--display);font-weight:600;font-size:26px;line-height:1.05;margin:0}
+  .bar{height:14px;background:var(--panel-2);border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--save);border-radius:1px}
+  .goal-line{font-size:14.5px;color:var(--ink-2);margin:0}
+  .goal-line b{font-family:var(--mono);font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+  .won{
+    font-family:var(--display);font-weight:700;font-size:22px;color:var(--stamp);
+    border:2px solid var(--stamp);border-radius:3px;padding:8px 12px;
+    display:inline-block;transform:rotate(-1.5deg);letter-spacing:.02em;
+  }
+
+  /* ---------- ledger ---------- */
+  .scroll{overflow-x:auto}
+  table{border-collapse:collapse;width:100%;min-width:520px}
+  caption{text-align:left;font-size:13px;color:var(--ink-3);padding-bottom:8px}
+  th{
+    font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--ink-2);text-align:left;font-weight:400;
+    padding:0 10px 7px 0;border-bottom:1.5px solid var(--rule-2);white-space:nowrap;
+  }
+  td{padding:9px 10px 9px 0;border-bottom:1px solid var(--rule);font-size:15px;vertical-align:top}
+  .c-date,.c-amt,.c-bal{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .c-date{font-size:12px;color:var(--ink-2)}
+  .c-amt,.c-bal{text-align:right}
+  .c-amt.minus{color:var(--out)}
+  .chip{
+    display:inline-flex;align-items:center;gap:5px;
+    font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--ink-2);white-space:nowrap;
+  }
+  .chip i{width:8px;height:8px;border-radius:2px;background:var(--c);display:block}
+  .del{
+    background:none;border:none;color:var(--ink-3);cursor:pointer;
+    font-size:15px;line-height:1;padding:2px 4px;border-radius:2px;
+  }
+  .del:hover{color:var(--out);background:var(--panel-2)}
+  footer{border-top:1.5px solid var(--rule);padding-top:14px;font-size:13.5px;color:var(--ink-2)}
+  footer p{margin:0 0 7px}
+  .micr{
+    font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ink-3);
+    margin:4px 0 0;
+  }
+  /* ---------- quick earn ---------- */
+  .jobs{display:flex;flex-direction:column;gap:8px}
+  .job{display:flex;gap:6px;align-items:stretch}
+  .job .earn{
+    flex:1;display:flex;justify-content:space-between;align-items:center;gap:10px;
+    font-family:var(--body);font-weight:700;font-size:15px;color:var(--ink);
+    background:var(--panel-2);border:1.5px solid var(--rule-2);border-radius:3px;
+    padding:12px 13px;cursor:pointer;text-align:left;
+  }
+  .job .earn:hover{background:var(--paper)}
+  .job .earn b{font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .job .del{font-size:18px;padding:0 8px;border:1.5px solid var(--rule);border-radius:3px}
+  .job-add{display:grid;grid-template-columns:1fr 120px auto;gap:8px;align-items:end;margin-top:6px}
+  @media (max-width:520px){.job-add{grid-template-columns:1fr 1fr}.job-add .btn{grid-column:1/-1}}
+  .jar-pick{display:flex;align-items:center;gap:10px;margin-top:4px}
+  .jar-pick select{width:auto;padding:7px 10px;font-size:14px}
+
+  /* ---------- jump bar: bottom on phones, side rail when there's room ---------- */
+  html{scroll-behavior:smooth}
+  section[id]{scroll-margin-top:18px}
+  .sheet{padding-bottom:118px}
+  .nav{
+    position:fixed;left:0;right:0;bottom:0;z-index:20;
+    display:flex;overflow-x:auto;scrollbar-width:none;
+    background:var(--panel);border-top:1.5px solid var(--rule-2);
+    padding:11px 12px calc(11px + env(safe-area-inset-bottom,0px));
+  }
+  .nav-inner{display:flex;gap:8px;margin:0 auto}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{
+    flex:none;font-family:var(--mono);font-size:13px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink-2);text-decoration:none;padding:11px 17px;
+    border:1.5px solid var(--rule);border-radius:999px;background:var(--panel-2);
+  }
+  .nav a[aria-current="true"]{background:var(--panel-2);color:var(--teal);border-color:var(--teal)}
+  @media (min-width:1380px){
+    .sheet{padding-bottom:60px;transform:translateX(36px)}
+    .nav{
+      left:max(14px, calc(50% - 470px - 170px));right:auto;top:50%;bottom:auto;transform:translateY(-50%);
+      flex-direction:column;overflow:visible;width:166px;
+      background:var(--panel);
+      border:1.5px solid var(--rule-2);
+      border-radius:999px;
+      padding:16px 0;
+      box-shadow:0 10px 30px rgba(0,0,0,.4);
+    }
+    .nav-inner{flex-direction:column;gap:2px;margin:0;width:100%}
+    .nav a{
+      font-size:14px;letter-spacing:.1em;text-align:center;
+      border:none;border-radius:999px;background:transparent;padding:11px 10px;
+    }
+    .nav a:hover{color:var(--ink)}
+    .nav a[aria-current="true"]{background:transparent;color:var(--teal);font-weight:600}
+  }
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+
+  /* ---------- the hundred-dollar thank you ---------- */
+  .bill-wrap{margin-top:46px}
+  .bill-scroll{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;padding-bottom:4px}
+  .bill{min-width:540px;max-width:980px;margin:0 auto}
+  .bill svg{display:block;width:100%;height:auto;border-radius:3px;
+    box-shadow:0 12px 34px rgba(0,0,0,.45),0 0 0 1px rgba(0,0,0,.4)}
+
+  .month-now b{font-family:var(--mono);font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+  .month-now b.up{color:var(--bar-in)}
+  .month-now b.down{color:var(--bar-out)}
+
+  /* ---------- IOU slips ---------- */
+  .owed-total{
+    font-family:var(--display);font-weight:700;font-size:clamp(38px,9vw,58px);
+    line-height:.9;letter-spacing:-.02em;color:var(--teal);
+    font-variant-numeric:tabular-nums;margin:0;
+  }
+  .ious{display:grid;gap:11px;grid-template-columns:repeat(auto-fill,minmax(236px,1fr))}
+  .iou{
+    position:relative;overflow:hidden;
+    background:var(--panel-2);border:1.5px solid var(--rule-2);border-radius:4px;
+    padding:12px 14px 13px 20px;display:flex;flex-direction:column;gap:5px;
+  }
+  .iou::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:5px;
+    background:repeating-linear-gradient(var(--teal) 0 7px,transparent 7px 14px);
+  }
+  .iou-tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3)}
+  .iou-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .iou-who{font-family:var(--display);font-weight:700;font-size:22px;line-height:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .iou-amt{font-family:var(--mono);font-weight:500;font-size:18px;color:var(--teal);font-variant-numeric:tabular-nums;flex:none}
+  .iou-when{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink-3)}
+  .iou-acts{display:flex;gap:7px;margin-top:4px}
+  .iou-acts .btn{font-size:12.5px;padding:8px 11px}
+
+
+  /* ---------- the way in ---------- */
+  .gate{
+    position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+    padding:22px;background:var(--paper);
+    background-image:
+      repeating-linear-gradient(27deg,var(--guilloche) 0 1px,transparent 1px 9px),
+      repeating-linear-gradient(-27deg,var(--guilloche) 0 1px,transparent 1px 9px);
+  }
+  .gate[hidden]{display:none!important}
+  .gate-box{
+    width:min(390px,100%);background:var(--panel);
+    border:1.5px solid var(--rule-2);border-radius:5px;padding:28px 26px 26px;text-align:center;
+    box-shadow:0 18px 50px rgba(0,0,0,.5);
+  }
+  .gate-box.wrong{animation:shake .4s}
+  @keyframes shake{
+    10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(3px)}
+    30%,50%,70%{transform:translateX(-6px)}40%,60%{transform:translateX(6px)}
+  }
+  .gate-logo{width:96px;height:96px;margin:0 auto 16px}
+  .gate-logo svg{display:block;width:100%;height:auto}
+  .gate h1{font-family:var(--display);font-weight:700;font-size:30px;line-height:1;margin:0 0 6px}
+  .gate p{font-size:14.5px;color:var(--ink-2);margin:0 0 18px}
+  .gate input{
+    width:100%;font-family:var(--mono);font-size:19px;letter-spacing:.2em;text-align:center;
+    color:var(--ink);background:var(--panel-2);border:1.5px solid var(--rule-2);
+    border-radius:3px;padding:13px 12px;margin-bottom:12px;
+  }
+  .gate .msg{min-height:1.2em;margin:11px 0 0}
+  .gate .gate-back{
+    display:inline-block;margin-top:16px;font-family:var(--mono);font-size:11px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);text-decoration:none;
+  }
+  .gate .gate-back:hover{color:var(--teal)}
+  @media (prefers-reduced-motion: reduce){.gate-box.wrong{animation:none}}
+
+  /* ---------- goal banner ---------- */
+  .banner{
+    display:flex;flex-wrap:wrap;align-items:center;gap:12px;
+    background:var(--panel);border:2px solid var(--stamp);border-radius:3px;
+    padding:13px 16px;font-size:16px;
+  }
+  .banner .ding{font-size:22px;line-height:1}
+  .banner strong{font-family:var(--display);font-weight:700;font-size:20px}
+
+  /* ---------- legend ---------- */
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:0}
+  .key{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);
+  }
+  .key i{width:11px;height:11px;border-radius:2px;background:var(--k);display:block}
+
+  /* ---------- celebration ---------- */
+  .veil{
+    position:fixed;inset:0;z-index:40;display:none;
+    align-items:center;justify-content:center;padding:20px;
+    background:rgba(8,18,26,.55);
+  }
+  .veil[data-open="true"]{display:flex}
+  .party{
+    position:relative;z-index:2;max-width:430px;width:100%;
+    background:var(--panel);border:2px solid var(--stamp);border-radius:4px;
+    padding:26px 24px;text-align:center;
+    box-shadow:0 18px 50px rgba(0,0,0,.35);
+    animation:pop .4s cubic-bezier(.2,.9,.3,1.35) both;
+  }
+  @keyframes pop{from{opacity:0;transform:scale(.86) translateY(14px)}to{opacity:1;transform:none}}
+  .party .stamp{
+    display:inline-block;font-family:var(--display);font-weight:700;font-size:30px;
+    color:var(--stamp);border:3px double var(--stamp);border-radius:4px;
+    padding:6px 16px;transform:rotate(-2deg);letter-spacing:.03em;margin-bottom:14px;
+  }
+  .party h3{font-family:var(--display);font-weight:700;font-size:28px;line-height:1.1;margin:0 0 6px}
+  .party .amt{font-family:var(--mono);font-size:15px;color:var(--ink-2);margin:0 0 18px;font-variant-numeric:tabular-nums}
+  .party .acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1}
+  .confetti i{
+    position:absolute;top:-14px;width:9px;height:14px;border-radius:1px;
+    animation:fall linear forwards;
+  }
+  @keyframes fall{
+    0%{transform:translateY(-10vh) rotate(0deg);opacity:1}
+    100%{transform:translateY(105vh) rotate(620deg);opacity:.85}
+  }
+  @media (prefers-reduced-motion: reduce){.confetti{display:none}}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="safety" aria-hidden="true"></div>
+
+<div class="gate" id="gate">
+  <div class="gate-box" id="gateBox">
+    <div class="gate-logo" id="gateLogo" aria-hidden="true"></div>
+    <h1>Bank of Cannon</h1>
+    <p>Private. Password, please.</p>
+    <form id="gateForm" autocomplete="off">
+      <label for="gatePw" class="lbl" style="display:block;text-align:left;margin-bottom:6px">Password</label>
+      <input id="gatePw" type="password" inputmode="text" autocomplete="current-password" maxlength="40" aria-label="Password">
+      <button class="btn primary" type="submit" style="width:100%">Open my bank</button>
+    </form>
+    <p class="msg" id="gateMsg" aria-live="polite"></p>
+    <a class="gate-back" href="../">&times; Back to Cannon&rsquo;s Launchpad</a>
+  </div>
+</div>
+
+
+
+<div class="sheet">
+  <a class="backout" id="backOut" href="#" hidden>
+    <span class="x" aria-hidden="true">&times;</span>
+    <span>Back to Cannon&rsquo;s Launchpad</span>
+  </a>
+
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Savings passbook &middot; Account &#8470; 0006 &middot; Est. 2026</p>
+      <h1>Bank of Cannon</h1>
+    </div>
+    <div class="mast-right">
+      <div class="logo" id="logo" aria-hidden="true"></div>
+      <p class="saveflag" id="saveflag"><span class="dot"></span><span id="saveText">Checking storage&hellip;</span></p>
+    </div>
+  </header>
+  <hr class="hr">
+
+  <div class="hello" id="firstRun" hidden>
+    <span><strong>Your bank starts at zero.</strong> Count the money you actually have right now and put it in. After that, everything you write down saves by itself.</span>
+    <button class="btn" id="startBtn" type="button">Put my first money in</button>
+  </div>
+
+  <div class="banner" id="goalBanner" role="status" hidden></div>
+
+  <div class="divider" id="sec-money"><span>Money</span></div>
+  <section class="panel hero" aria-labelledby="h-total">
+    <h2 id="h-total">All my money</h2>
+    <p class="total" id="total">$0.00</p>
+    <p class="record" id="recordLine"></p>
+    <div class="jars">
+      <div class="jar spend">
+        <p class="jar-name"><span class="swatch"></span>Spend</p>
+        <p class="jar-amt" id="j-spend">$0.00</p>
+        <p class="jar-note">money you can use now</p>
+      </div>
+      <div class="jar save">
+        <p class="jar-name"><span class="swatch"></span>Save</p>
+        <p class="jar-amt" id="j-save">$0.00</p>
+        <p class="jar-note" id="saveNote">money that grows</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" id="sec-write"><span>Write</span></div>
+  <section class="panel" aria-labelledby="h-entry">
+    <h2 id="h-entry">Write it down</h2>
+    <div class="seg" id="kindSeg" role="group" aria-label="Kind of entry">
+      <button type="button" data-kind="in" aria-pressed="true">Money in</button>
+      <button type="button" data-kind="out" aria-pressed="false">Money out</button>
+      <button type="button" data-kind="move" aria-pressed="false">Move</button>
+    </div>
+    <form id="entryForm">
+      <div class="field">
+        <label for="amt">How much?</label>
+        <input id="amt" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal">
+      </div>
+      <div class="field" style="margin-top:10px">
+        <label for="note" id="noteLbl">What was it for?</label>
+        <input id="note" type="text" maxlength="40" placeholder="mowed a lawn">
+      </div>
+      <div class="row2" style="margin-top:10px">
+        <div class="field">
+          <label for="acct" id="acctLbl">Which jar?</label>
+          <select id="acct">
+            <option value="spend">Spend</option>
+            <option value="save">Save</option>
+          </select>
+        </div>
+        <div class="field" id="toField" hidden>
+          <label for="acctTo">Into</label>
+          <select id="acctTo">
+            <option value="save">Save</option>
+            <option value="spend">Spend</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn primary" id="submitBtn" type="submit" style="margin-top:12px;width:100%">Add money in</button>
+    </form>
+    <button class="btn" id="undoBtn" type="button" style="margin-top:9px" hidden></button>
+    <p class="msg" id="entryMsg"></p>
+  </section>
+
+  <div class="divider" id="sec-owed"><span>Owed</span></div>
+  <section class="panel" aria-labelledby="h-owed">
+    <h2 id="h-owed">Money people owe me</h2>
+    <p class="owed-total" id="owedTotal">$0.00</p>
+    <p class="goal-line" style="margin:0">This is <em>not</em> in the bank yet. When somebody pays you back, tap <b>Paid me</b> and it drops straight into your jar.</p>
+    <p class="goal-line month-now" id="owedWhen" style="margin:0"></p>
+    <div id="owedView"></div>
+    <p class="msg" id="owedMsg"></p>
+  </section>
+
+  <div class="divider" id="sec-months"><span>Months</span></div>
+  <section class="panel" aria-labelledby="h-bars">
+  <h2 id="h-bars">Gained and lost &mdash; every month</h2>
+  <p class="goal-line" id="barsRange" style="margin:0"></p>
+  <p class="goal-line month-now" id="barsNow" style="margin:0"></p>
+  <p class="legend">
+    <span class="key" style="--k:var(--bar-in)"><i></i>Gained</span>
+    <span class="key" style="--k:var(--bar-out)"><i></i>Lost</span>
+  </p>
+  <div class="chart-wrap" id="barsWrap"></div>
+  </section>
+
+  <div class="divider" id="sec-goal"><span>Goal</span></div>
+  <section class="panel" aria-labelledby="h-goal">
+    <h2 id="h-goal">What I'm saving for</h2>
+    <div id="goalView"></div>
+  </section>
+
+  <div class="divider" id="sec-allow"><span>Allowance</span></div>
+  <section class="panel" aria-labelledby="h-allow">
+    <h2 id="h-allow">Allowance &amp; savings booster</h2>
+    <div id="allowView"></div>
+  </section>
+
+  <section class="bill-wrap" aria-label="Thank you note">
+    <div class="bill-scroll">
+      <div class="bill" id="bill"></div>
+    </div>
+  </section>
+
+</div>
+
+<nav class="nav" id="nav" aria-label="Jump to a part of the bank">
+  <div class="nav-inner">
+    <a href="#sec-money">Money</a>
+    <a href="#sec-write">Write</a>
+    <a href="#sec-owed">Owed</a>
+    <a href="#sec-months">Months</a>
+    <a href="#sec-goal">Goal</a>
+    <a href="#sec-allow">Allowance</a>
+  </div>
+</nav>
+
+<div class="veil" id="veil" data-open="false">
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+  <div class="party" role="dialog" aria-modal="true" aria-labelledby="partyTitle">
+    <span class="stamp">You did it!</span>
+    <h3 id="partyTitle"></h3>
+    <p class="amt" id="partyAmt"></p>
+    <div class="acts">
+      <button class="btn primary" id="partyBuy" type="button">I bought it</button>
+      <button class="btn" id="partyLater" type="button">Not yet</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var DAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var ACCT = {spend:"Spend", save:"Save"};
+  var LS = "mybank.v1";
+
+  var state = null;
+  var kind = "in";
+  var saveMode = "local";
+  var dbDoc = null;
+  var writing = false, dirty = false;
+
+  /* ---------------- money helpers (everything in whole cents) ---------------- */
+  function fmt(cents){
+    var neg = cents < 0;
+    var v = Math.abs(Math.round(cents));
+    var s = (v / 100).toFixed(2);
+    var parts = s.split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return (neg ? "-$" : "$") + parts.join(".");
+  }
+  function toCents(v){
+    var n = parseFloat(String(v).replace(/[^0-9.]/g, ""));
+    if(!isFinite(n) || n <= 0) return 0;
+    return Math.round(n * 100);
+  }
+  function dayKey(d){
+    return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+  }
+  function shortDate(ts){
+    var d = new Date(ts);
+    return (d.getMonth()+1) + "/" + d.getDate();
+  }
+  function longDate(ts){
+    var d = new Date(ts);
+    return DAYS[d.getDay()].slice(0,3) + " " + (d.getMonth()+1) + "/" + d.getDate();
+  }
+
+  /* ---------------- the ledger is the only truth ---------------- */
+  function balances(tx){
+    var b = {spend:0, save:0};
+    tx.forEach(function(t){
+      if(t.kind === "in" || t.kind === "interest") b[t.acct] += t.amount;
+      else if(t.kind === "out") b[t.acct] -= t.amount;
+      else if(t.kind === "move"){ b[t.acct] -= t.amount; b[t.to] += t.amount; }
+    });
+    return b;
+  }
+  function total(tx){
+    var b = balances(tx);
+    return b.spend + b.save;
+  }
+  var totalMoney = total;
+
+  function emptyState(){
+    return {tx:[], goal:null, allowance:{amount:0, day:6, last:null}, allowanceOn:false,
+            rate:2, interestMonth:null, owed:[], owedJar:"spend"};
+  }
+  function monthKey(d){ return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0"); }
+
+  /* ---------------- storage ---------------- */
+  function sane(s){
+    if(!s || typeof s !== "object" || !Array.isArray(s.tx)) return null;
+    var out = emptyState();
+    out.tx = s.tx.filter(function(t){
+      return t && typeof t.amount === "number" && t.amount >= 0 && ACCT[t.acct] &&
+             ["in","out","move","interest"].indexOf(t.kind) >= 0 &&
+             (t.kind !== "move" || ACCT[t.to]);
+    }).slice(0, 800);
+    if(s.goal && s.goal.name && typeof s.goal.target === "number") out.goal = {name:String(s.goal.name).slice(0,40), target:s.goal.target, celebrated:!!s.goal.celebrated};
+    if(s.allowance) out.allowance = {
+      amount: Number(s.allowance.amount) || 0,
+      day: Math.min(6, Math.max(0, Number(s.allowance.day) || 0)),
+      last: s.allowance.last || null
+    };
+    out.allowanceOn = !!s.allowanceOn || out.allowance.amount > 0;
+    out.rate = Math.min(50, Math.max(0, Number(s.rate) || 0));
+    out.interestMonth = s.interestMonth || null;
+    if(Array.isArray(s.owed)){
+      out.owed = s.owed.filter(function(o){
+        return o && o.who && typeof o.amount === "number" && o.amount > 0;
+      }).map(function(o){
+        return {id:String(o.id || "o" + Math.random().toString(36).slice(2,7)),
+                who:String(o.who).slice(0,24), amount:Math.round(o.amount), ts:Number(o.ts) || Date.now()};
+      }).slice(0, 60);
+    }
+    out.owedJar = ACCT[s.owedJar] ? s.owedJar : "spend";
+    return out;
+  }
+  function readLocal(){
+    try{ return sane(JSON.parse(window.localStorage.getItem(LS))); }catch(e){ return null; }
+  }
+  function writeLocal(){
+    try{ window.localStorage.setItem(LS, JSON.stringify(state)); }catch(e){}
+  }
+  function persist(){
+    writeLocal();
+    if(!dbDoc) return;
+    if(writing){ dirty = true; return; }
+    writing = true;
+    var body = JSON.parse(JSON.stringify(state));
+    dbDoc.set(body).then(function(){
+      writing = false;
+      if(dirty){ dirty = false; persist(); }
+    }, function(err){
+      writing = false; dirty = false;
+      saveMode = (err && (err.code === "not_granted" || err.code === "permission_denied")) ? "readonly" : "local";
+      flagStorage();
+    });
+  }
+  function flagStorage(){
+    var t = document.getElementById("saveText");
+    t.textContent = saveMode === "cloud" ? "Synced to all your phones"
+      : saveMode === "readonly" ? "View only on this phone"
+      : "Saved on this phone";
+  }
+  function connect(){
+    if(!window.claude || !window.claude.use) return;
+    Promise.resolve(window.claude.use("db")).then(function(db){
+      if(!db) return;
+      var ref;
+      try{ ref = db.doc("bank/cannon"); }catch(e){ return; }
+      return ref.get().then(function(snap){
+        dbDoc = ref;
+        saveMode = "cloud";
+        var cloud = snap.exists ? sane(snap.data()) : null;
+        var hasLocal = state.tx.length || state.goal || state.allowance.amount || state.owed.length;
+        if(cloud && (cloud.tx.length >= state.tx.length) && (cloud.tx.length || cloud.goal || cloud.allowance.amount || cloud.owed.length)){
+          state = cloud; renderAll();
+        }else if(hasLocal){
+          persist();
+        }
+        flagStorage();
+        watch(ref);
+      });
+    }).catch(function(){});
+  }
+  function watch(ref){
+    try{
+      ref.onSnapshot(function(snap){
+        if(snap.metadata && snap.metadata.hasPendingWrites) return;
+        if(writing || dirty) return;
+        if(!snap.exists) return;
+        var incoming = sane(snap.data());
+        if(!incoming) return;
+        if(JSON.stringify(incoming) === JSON.stringify(state)) return;
+        state = incoming;
+        writeLocal();
+        renderAll();
+      }, function(){});
+    }catch(e){}
+  }
+
+  /* ---------------- rendering ---------------- */
+  function renderAll(){
+    var b = balances(state.tx);
+    document.getElementById("total").textContent = fmt(b.spend + b.save);
+    document.getElementById("j-spend").textContent = fmt(b.spend);
+    document.getElementById("j-save").textContent = fmt(b.save);
+    document.getElementById("saveNote").textContent = state.goal
+      ? (b.save >= state.goal.target
+          ? "enough for the " + state.goal.name
+          : fmt(state.goal.target - b.save) + " more for the " + state.goal.name)
+      : "money that grows";
+    document.getElementById("firstRun").hidden = state.tx.length > 0;
+    renderBars();
+    renderOwed();
+    renderUndo();
+    renderRecord();
+    renderGoal();
+    renderAllowance();
+    renderLedger();
+    renderBanner();
+  }
+
+  function esc(v){
+    return String(v).replace(/[&<>"]/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];
+    });
+  }
+
+  /* ----- "you can get it now" ----- */
+  function goalReached(){
+    return !!(state.goal && balances(state.tx).save >= state.goal.target);
+  }
+  function buyGoal(){
+    if(!state.goal) return;
+    addTx({kind:"out", acct:"save", amount:state.goal.target, note:"Bought: " + state.goal.name});
+    state.goal = null;
+    closeParty();
+    persist(); renderAll();
+  }
+  function renderBanner(){
+    var el = document.getElementById("goalBanner");
+    if(!goalReached()){ el.hidden = true; el.textContent = ""; return; }
+    el.hidden = false;
+    el.innerHTML = '<span class="ding">\uD83C\uDF89</span>' +
+      '<span><strong>You have enough for the ' + esc(state.goal.name) + '.</strong> ' +
+      'You can get it now &mdash; there is ' + fmt(balances(state.tx).save) + ' in your Save jar.</span>' +
+      '<button class="btn primary" id="bannerBuy" type="button" style="margin-left:auto">I bought it</button>';
+    el.querySelector("#bannerBuy").addEventListener("click", buyGoal);
+    if(!state.goal.celebrated){
+      state.goal.celebrated = true;
+      persist();
+      party();
+    }
+  }
+  function party(){
+    var veil = document.getElementById("veil");
+    document.getElementById("partyTitle").textContent = state.goal.name;
+    document.getElementById("partyAmt").textContent =
+      "You saved all " + fmt(state.goal.target) + " of it.";
+    var box = document.getElementById("confetti");
+    box.textContent = "";
+    var colors = ["var(--bar-in)","var(--spend)","var(--save)","var(--stamp)","var(--bar-out)"];
+    for(var i = 0; i < 26; i++){
+      var bit = document.createElement("i");
+      bit.style.left = (Math.random() * 100).toFixed(1) + "%";
+      bit.style.background = colors[i % colors.length];
+      bit.style.animationDuration = (1.6 + Math.random() * 1.4).toFixed(2) + "s";
+      bit.style.animationDelay = (Math.random() * 0.5).toFixed(2) + "s";
+      box.appendChild(bit);
+    }
+    veil.setAttribute("data-open","true");
+    document.getElementById("partyBuy").focus();
+  }
+  function closeParty(){
+    document.getElementById("veil").setAttribute("data-open","false");
+    document.getElementById("confetti").textContent = "";
+  }
+  document.getElementById("partyBuy").addEventListener("click", buyGoal);
+  document.getElementById("partyLater").addEventListener("click", closeParty);
+  document.getElementById("veil").addEventListener("click", function(e){
+    if(e.target.id === "veil") closeParty();
+  });
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape") closeParty();
+  });
+
+  /* ----- bar chart: gained and lost, side by side, every month ----- */
+  var MONTH_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var MONTH_LONG = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  /* The year starts the month Cannon started, and runs twelve months forward.
+     It never slides on its own, so a month he already filled in stays put. */
+  function yearStart(){
+    var first = null;
+    state.tx.forEach(function(t){ if(first === null || t.ts < first) first = t.ts; });
+    var d = first === null ? new Date() : new Date(first);
+    var anchor = new Date(d.getFullYear(), d.getMonth(), 1);
+    var now = new Date(), cur = new Date(now.getFullYear(), now.getMonth(), 1);
+    while(cur.getFullYear() * 12 + cur.getMonth() >= anchor.getFullYear() * 12 + anchor.getMonth() + 12){
+      anchor = new Date(anchor.getFullYear() + 1, anchor.getMonth(), 1);
+    }
+    return anchor;
+  }
+  function renderBars(){
+    var wrap = document.getElementById("barsWrap");
+    var MONTHS = 12;
+    var start = yearStart();
+    var buckets = [];
+    for(var i = 0; i < MONTHS; i++){
+      var d = new Date(start.getFullYear(), start.getMonth() + i, 1);
+      buckets.push({key: monthKey(d), m: d.getMonth(), y: d.getFullYear(), inn: 0, out: 0});
+    }
+    var index = {};
+    buckets.forEach(function(b, k){ index[b.key] = k; });
+    state.tx.forEach(function(t){
+      var k = index[monthKey(new Date(t.ts))];
+      if(k === undefined) return;
+      if(t.kind === "in" || t.kind === "interest") buckets[k].inn += t.amount;
+      else if(t.kind === "out") buckets[k].out += t.amount;
+    });
+
+    var peak = 0;
+    buckets.forEach(function(b){ peak = Math.max(peak, b.inn, b.out); });
+    if(peak === 0){
+      wrap.innerHTML = '<p class="no-chart">Nothing has moved yet. Put money in and the bars show up here &mdash; one pair for every month of the year.</p>';
+      return;
+    }
+    var step = peak > 20000 ? 5000 : peak > 8000 ? 2500 : peak > 3000 ? 1000 : 500;
+    var top = Math.ceil(peak / step) * step;
+
+    var W = 760, H = 250, L = 64, R = 14, T = 26, B = 34;
+    var plotH = H - T - B, base = T + plotH;
+    var slot = (W - L - R) / MONTHS;
+    var gw = Math.min(64, slot * 0.68);
+    var bw = (gw - 2) / 2;
+    var hgt = function(v){ return (v / top) * plotH; };
+    var cx = function(k){ return L + slot * (k + 0.5); };
+
+    function upBar(x, w, height){
+      if(height < 0.6) return "";
+      var r = Math.min(4, w / 2, height), y1 = base - height;
+      return 'M' + x.toFixed(1) + ' ' + base + ' L' + x.toFixed(1) + ' ' + (y1 + r).toFixed(1) +
+        ' Q' + x.toFixed(1) + ' ' + y1.toFixed(1) + ' ' + (x + r).toFixed(1) + ' ' + y1.toFixed(1) +
+        ' L' + (x + w - r).toFixed(1) + ' ' + y1.toFixed(1) +
+        ' Q' + (x + w).toFixed(1) + ' ' + y1.toFixed(1) + ' ' + (x + w).toFixed(1) + ' ' + (y1 + r).toFixed(1) +
+        ' L' + (x + w).toFixed(1) + ' ' + base + ' Z';
+    }
+
+    var bars = "", labels = "", hits = "";
+    buckets.forEach(function(b, k){
+      var xin = cx(k) - gw / 2, xout = xin + bw + 2;
+      if(b.inn > 0) bars += '<path d="' + upBar(xin, bw, hgt(b.inn)) + '" fill="var(--bar-in)"></path>';
+      if(b.out > 0) bars += '<path d="' + upBar(xout, bw, hgt(b.out)) + '" fill="var(--bar-out)"></path>';
+      labels += '<text x="' + cx(k).toFixed(1) + '" y="' + (H - 10) + '" text-anchor="middle" fill="var(--ink-3)" ' +
+        'font-family="IBM Plex Mono, monospace" font-size="10.5">' + MONTH_NAMES[b.m] + '</text>';
+      hits += '<rect class="bhit" data-k="' + k + '" x="' + (cx(k) - slot / 2).toFixed(1) + '" y="' + T +
+        '" width="' + slot.toFixed(1) + '" height="' + plotH + '" fill="transparent"></rect>';
+    });
+
+    var grid = [0, top / 2, top].map(function(v){
+      var y = base - hgt(v);
+      return '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y.toFixed(1) + '" y2="' + y.toFixed(1) +
+        '" stroke="' + (v === 0 ? "var(--rule-2)" : "var(--rule)") + '" stroke-width="' + (v === 0 ? 1.5 : 1) + '"></line>' +
+        '<text x="' + (L - 9) + '" y="' + (y + 4).toFixed(1) + '" text-anchor="end" fill="var(--ink-3)" ' +
+        'font-family="IBM Plex Mono, monospace" font-size="11">' + fmt(v) + '</text>';
+    }).join("");
+
+    wrap.innerHTML =
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Money gained and money lost for each of the twelve months from ' + MONTH_LONG[buckets[0].m] + ' ' + buckets[0].y + '">' +
+        grid + bars + labels + hits +
+      '</svg>' +
+      '<div class="tip" id="tip2"></div>';
+
+    var range = document.getElementById("barsRange");
+    if(range) range.textContent = MONTH_LONG[buckets[0].m] + " " + buckets[0].y + " through " +
+      MONTH_LONG[buckets[MONTHS - 1].m] + " " + buckets[MONTHS - 1].y + ". Nothing you write down is ever thrown away.";
+
+    var nowKey = monthKey(new Date()), here = null;
+    buckets.forEach(function(b){ if(b.key === nowKey) here = b; });
+    var sum = document.getElementById("barsNow");
+    if(sum){
+      if(here && (here.inn || here.out)){
+        var kept = here.inn - here.out;
+        sum.innerHTML = 'This month you gained <b class="up">' + fmt(here.inn) + '</b>' +
+          ' and lost <b class="down">' + fmt(here.out) + '</b> &mdash; you kept <b>' +
+          (kept >= 0 ? fmt(kept) : "-" + fmt(-kept)) + '</b>.';
+      }else{
+        sum.textContent = "Nothing has moved this month yet.";
+      }
+    }
+    var tip = wrap.querySelector("#tip2");
+    Array.prototype.forEach.call(wrap.querySelectorAll(".bhit"), function(r){
+      r.addEventListener("pointerenter", function(){
+        var k = Number(r.getAttribute("data-k")), b = buckets[k];
+        var net = b.inn - b.out;
+        tip.innerHTML = '<span class="tdate">' + MONTH_LONG[b.m] + ' ' + b.y + '</span><br>' +
+          'Gained <b>' + fmt(b.inn) + '</b><br>Lost <b>' + fmt(b.out) + '</b><br>' +
+          (net >= 0 ? 'Kept <b>' + fmt(net) + '</b>' : 'Down <b>' + fmt(-net) + '</b>');
+        tip.style.display = "block";
+        tip.style.left = ((cx(k) / W) * 100) + "%";
+        tip.style.top = ((T + 4) / H * 100) + "%";
+      });
+      r.addEventListener("pointerleave", function(){ tip.style.display = "none"; });
+    });
+  }
+
+
+  /* ----- the logo: a hundred-dollar note sitting on the app's own paper ----- */
+  function logoSVG(rounded){
+    var S = 512, INK = "#13402E", INK2 = "#2A6B4D", PAPER = "#EFEDDC";
+    var NAVY = "#0A121B", HATCH = "rgba(170,210,255,0.11)";
+    var bx = 30, by = 154, bw = 452, bh = 204;   /* the note, with the app's own paper above and below */
+
+    var hatch = "";
+    for(var i = -S; i < S * 2; i += 26){
+      hatch += '<path d="M' + i + ' 0 L' + (i + S) + ' ' + S + '" stroke="' + HATCH + '" stroke-width="1.4" fill="none"></path>' +
+               '<path d="M' + i + ' ' + S + ' L' + (i + S) + ' 0" stroke="' + HATCH + '" stroke-width="1.4" fill="none"></path>';
+    }
+    var waves = "";
+    for(var y = by + 10; y < by + bh - 6; y += 9){
+      waves += '<path d="' + waveBand(bx + 8, bx + bw - 8, y, 2.4, 9, 90) +
+               '" fill="none" stroke="#6FA98C" stroke-width="0.7" opacity="0.5"></path>';
+    }
+    var rose = guilloche(0, 0, 30, 9, 14, 420);
+
+    return '<svg viewBox="0 0 ' + S + ' ' + S + '" xmlns="http://www.w3.org/2000/svg">' +
+      '<defs><clipPath id="lgClip"><rect width="' + S + '" height="' + S + '" rx="' + (rounded ? 104 : 0) + '"></rect></clipPath></defs>' +
+      '<g clip-path="url(#lgClip)">' +
+        '<rect width="' + S + '" height="' + S + '" fill="' + NAVY + '"></rect>' + hatch +
+        '<rect x="' + bx + '" y="' + by + '" width="' + bw + '" height="' + bh + '" rx="7" fill="' + PAPER + '"></rect>' +
+        waves +
+        '<rect x="' + (bx + 9) + '" y="' + (by + 9) + '" width="' + (bw - 18) + '" height="' + (bh - 18) +
+          '" fill="none" stroke="' + INK + '" stroke-width="4"></rect>' +
+        '<rect x="' + (bx + 18) + '" y="' + (by + 18) + '" width="' + (bw - 36) + '" height="' + (bh - 36) +
+          '" fill="none" stroke="' + INK + '" stroke-width="1.4"></rect>' +
+        '<polyline points="' + rose + '" fill="none" stroke="' + INK2 + '" stroke-width="1" opacity="0.85" ' +
+          'transform="translate(' + (bx + 52) + ',' + (by + bh / 2) + ')"></polyline>' +
+        '<polyline points="' + rose + '" fill="none" stroke="' + INK2 + '" stroke-width="1" opacity="0.85" ' +
+          'transform="translate(' + (bx + bw - 52) + ',' + (by + bh / 2) + ')"></polyline>' +
+        '<text x="' + (bx + 52) + '" y="' + (by + bh / 2 + 9) + '" text-anchor="middle" fill="' + INK + '" ' +
+          'font-family="Bodoni Moda, Didot, serif" font-weight="700" font-size="26" ' +
+          'textLength="40" lengthAdjust="spacingAndGlyphs">100</text>' +
+        '<text x="' + (bx + bw - 52) + '" y="' + (by + bh / 2 + 9) + '" text-anchor="middle" fill="' + INK + '" ' +
+          'font-family="Bodoni Moda, Didot, serif" font-weight="700" font-size="26" ' +
+          'textLength="40" lengthAdjust="spacingAndGlyphs">100</text>' +
+        '<text x="256" y="' + (by + bh / 2 + 30) + '" text-anchor="middle" fill="' + INK + '" ' +
+          'font-family="Bodoni Moda, Didot, serif" font-weight="700" font-size="120" ' +
+          'textLength="190" lengthAdjust="spacingAndGlyphs">BC</text>' +
+        '<text x="256" y="' + (by + bh - 30) + '" text-anchor="middle" fill="' + INK2 + '" ' +
+          'font-family="Public Sans, system-ui, sans-serif" font-weight="700" font-size="15" ' +
+          'letter-spacing="5" textLength="186" lengthAdjust="spacing">BANK OF CANNON</text>' +
+      '</g>' +
+    '</svg>';
+  }
+
+  /* the same mark, painted on a canvas, so a phone can use it as the app icon */
+  function paintIcon(){
+    try{
+      var S = 512, c = document.createElement("canvas");
+      c.width = S; c.height = S;
+      var g = c.getContext("2d");
+      if(!g) return;
+      g.fillStyle = "#0A121B"; g.fillRect(0, 0, S, S);
+      g.strokeStyle = "rgba(170,210,255,0.11)"; g.lineWidth = 1.4;
+      for(var i = -S; i < S * 2; i += 26){
+        g.beginPath(); g.moveTo(i, 0); g.lineTo(i + S, S); g.stroke();
+        g.beginPath(); g.moveTo(i, S); g.lineTo(i + S, 0); g.stroke();
+      }
+      var bx = 30, by = 154, bw = 452, bh = 204;
+      g.fillStyle = "#EFEDDC"; g.fillRect(bx, by, bw, bh);
+      g.strokeStyle = "#13402E"; g.lineWidth = 4;
+      g.strokeRect(bx + 9, by + 9, bw - 18, bh - 18);
+      g.lineWidth = 1.4;
+      g.strokeRect(bx + 18, by + 18, bw - 36, bh - 36);
+      g.fillStyle = "#13402E";
+      g.textAlign = "center"; g.textBaseline = "alphabetic";
+      g.font = '700 120px "Bodoni Moda", Didot, "Times New Roman", serif';
+      g.fillText("BC", 256, by + bh / 2 + 30);
+      g.font = '700 26px "Bodoni Moda", Didot, serif';
+      g.fillText("100", bx + 52, by + bh / 2 + 9);
+      g.fillText("100", bx + bw - 52, by + bh / 2 + 9);
+      g.fillStyle = "#2A6B4D";
+      g.font = '700 15px "Public Sans", system-ui, sans-serif';
+      g.fillText("BANK OF CANNON", 256, by + bh - 30);
+
+      var url = c.toDataURL("image/png");
+      installMeta(url);
+      ["apple-touch-icon", "icon"].forEach(function(rel){
+        var link = document.createElement("link");
+        link.rel = rel;
+        link.setAttribute("sizes", "512x512");
+        link.type = "image/png";
+        link.href = url;
+        document.head.appendChild(link);
+      });
+    }catch(e){ /* no canvas, no icon - the app still works */ }
+  }
+
+  /* everything a phone or a laptop needs to treat this page as an installed app */
+  function installMeta(iconUrl){
+    function meta(name, content){
+      if(document.head.querySelector('meta[name="' + name + '"]')) return;
+      var m = document.createElement("meta");
+      m.setAttribute("name", name);
+      m.setAttribute("content", content);
+      document.head.appendChild(m);
+    }
+    meta("apple-mobile-web-app-capable", "yes");
+    meta("mobile-web-app-capable", "yes");
+    meta("apple-mobile-web-app-status-bar-style", "black-translucent");
+    meta("apple-mobile-web-app-title", "Bank of Cannon");
+    meta("application-name", "Bank of Cannon");
+    meta("theme-color", "#0A121B");
+    try{
+      if(document.head.querySelector('link[rel="manifest"]')) return;
+      var mf = {
+        name: "Bank of Cannon",
+        short_name: "Bank of Cannon",
+        display: "standalone",
+        orientation: "portrait",
+        background_color: "#0A121B",
+        theme_color: "#0A121B",
+        start_url: location.href,
+        icons: [{src: iconUrl, sizes: "512x512", type: "image/png", purpose: "any maskable"}]
+      };
+      var link = document.createElement("link");
+      link.rel = "manifest";
+      link.href = "data:application/manifest+json," + encodeURIComponent(JSON.stringify(mf));
+      document.head.appendChild(link);
+    }catch(e){ /* no manifest - Add to Home Screen still works */ }
+  }
+
+  /* ----- the banknote: engraved the way real notes are, for a bank that isn't real ----- */
+  function guilloche(cx, cy, R, r, d, steps){
+    /* a hypotrochoid - the same curve a spirograph draws, and the same one
+       engravers use for the rosettes on banknotes */
+    var pts = [], k = (R - r) / r, turns = r / gcd(R, r);
+    for(var i = 0; i <= steps; i++){
+      var t = (i / steps) * Math.PI * 2 * turns;
+      pts.push(((cx + (R - r) * Math.cos(t) + d * Math.cos(k * t))).toFixed(1) + "," +
+               ((cy + (R - r) * Math.sin(t) - d * Math.sin(k * t))).toFixed(1));
+    }
+    return pts.join(" ");
+  }
+  function gcd(a, b){ return b ? gcd(b, a % b) : a; }
+
+  function waveBand(x0, x1, y, amp, waves, steps){
+    var d = "";
+    for(var i = 0; i <= steps; i++){
+      var x = x0 + (x1 - x0) * (i / steps);
+      var yy = y + amp * Math.sin((i / steps) * Math.PI * 2 * waves);
+      d += (i ? "L" : "M") + x.toFixed(1) + " " + yy.toFixed(1);
+    }
+    return d;
+  }
+
+  function drawBill(){
+    var host = document.getElementById("bill");
+    if(!host) return;
+    var W = 1000, H = 425;
+    var INK = "#0E3324", INK2 = "#27654A", FAINT = "#6FA98C", SEAL = "#14565E", PAPER = "#EFEDDC";
+
+    /* engine-turned ground, the fine waves printed under everything else */
+    var ground = "";
+    for(var y = 14; y < H - 10; y += 7){
+      ground += '<path d="' + waveBand(10, W - 10, y, 2.2 + 1.6 * Math.sin(y / 26), 13, 170) +
+                '" fill="none" stroke="' + FAINT + '" stroke-width="0.45" opacity="0.45"></path>';
+    }
+
+    var rose = guilloche(0, 0, 58, 17, 26, 760);
+    var micro = "";
+    for(var m = 0; m < 9; m++) micro += "THANKYOUCHRISTIAN ";
+
+    /* every wide line gets a locked width, so nothing can collide if a font swaps in late */
+    function line(x, y, txt, size, weight, fill, len, anchor, fam, ls){
+      return '<text x="' + x + '" y="' + y + '" text-anchor="' + (anchor || "middle") + '" ' +
+        'font-family="' + (fam || "Bodoni Moda, Didot, serif") + '" font-weight="' + (weight || 400) + '" ' +
+        'font-size="' + size + '" fill="' + fill + '"' +
+        (ls ? ' letter-spacing="' + ls + '"' : '') +
+        (len ? ' textLength="' + len + '" lengthAdjust="spacing"' : '') + '>' + txt + '</text>';
+    }
+    var SANS = "Public Sans, system-ui, sans-serif", MONO = "IBM Plex Mono, monospace";
+
+    host.innerHTML =
+    '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" ' +
+      'aria-label="A hundred-dollar note from the Bank of Cannon: a big thank you to my big brother Christian and Claude AI for helping me make this website. P.S. Cannon, sole account holder.">' +
+
+      '<defs>' +
+        '<clipPath id="noteClip"><rect x="0" y="0" width="' + W + '" height="' + H + '" rx="6"></rect></clipPath>' +
+        '<clipPath id="ovalClip"><ellipse cx="196" cy="206" rx="92" ry="104"></ellipse></clipPath>' +
+        '<polyline id="rose" points="' + rose + '" fill="none" stroke="' + INK2 + '" stroke-width="0.55" opacity="0.8"></polyline>' +
+      '</defs>' +
+
+      '<g clip-path="url(#noteClip)">' +
+        '<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="' + PAPER + '"></rect>' +
+        ground +
+
+        /* frame: heavy rule, hairline, lathe-work between */
+        '<rect x="13" y="13" width="' + (W - 26) + '" height="' + (H - 26) + '" fill="none" stroke="' + INK + '" stroke-width="3"></rect>' +
+        '<rect x="22" y="22" width="' + (W - 44) + '" height="' + (H - 44) + '" fill="none" stroke="' + INK + '" stroke-width="1"></rect>' +
+        '<path d="' + waveBand(22, W - 22, 17.5, 2.6, 76, 560) + '" fill="none" stroke="' + INK2 + '" stroke-width="0.7"></path>' +
+        '<path d="' + waveBand(22, W - 22, H - 17.5, 2.6, 76, 560) + '" fill="none" stroke="' + INK2 + '" stroke-width="0.7"></path>' +
+
+        '<use href="#rose" transform="translate(74,74)"></use>' +
+        '<use href="#rose" transform="translate(926,74)"></use>' +
+        '<use href="#rose" transform="translate(74,351)"></use>' +
+        '<use href="#rose" transform="translate(926,351)"></use>' +
+        corner100(74, 74, INK, PAPER) + corner100(926, 74, INK, PAPER) +
+        corner100(74, 351, INK, PAPER) + corner100(926, 351, INK, PAPER) +
+
+        /* the vignette, where a president would go */
+        '<g clip-path="url(#ovalClip)">' +
+          '<rect x="100" y="98" width="192" height="216" fill="#E7E5D2"></rect>' +
+          '<polyline points="' + guilloche(0, 0, 100, 29, 46, 1000) + '" fill="none" stroke="' + INK2 +
+            '" stroke-width="0.6" opacity="0.85" transform="translate(196,206)"></polyline>' +
+          '<polyline points="' + guilloche(0, 0, 66, 19, 30, 760) + '" fill="none" stroke="' + INK +
+            '" stroke-width="0.55" opacity="0.65" transform="translate(196,206)"></polyline>' +
+        '</g>' +
+        '<ellipse cx="196" cy="206" rx="92" ry="104" fill="none" stroke="' + INK + '" stroke-width="2.4"></ellipse>' +
+        '<ellipse cx="196" cy="206" rx="85" ry="97" fill="none" stroke="' + INK + '" stroke-width="0.8"></ellipse>' +
+        '<rect x="326" y="52" width="528" height="348" rx="9" fill="' + PAPER + '" opacity="0.9"></rect>' +
+        '<rect x="326" y="52" width="528" height="348" rx="9" fill="none" stroke="' + INK2 +
+          '" stroke-width="0.8" opacity="0.3"></rect>' +
+
+        line(196, 122, "ACCOUNT N&#186; 0006", 8.5, 400, INK2, 108, "middle", MONO, 3) +
+        line(196, 238, "6", 112, 700, INK) +
+        line(196, 276, "CANNON", 14, 700, INK, 96, "middle", SANS, 7) +
+        line(210, 344, "SERIES 2026 &#183; NOT LEGAL TENDER", 8, 700, INK2, 178, "middle", SANS, 2) +
+
+        /* the bank */
+        line(620, 96, "THE BANK OF CANNON", 42, 700, INK, 452) +
+        '<path d="M392 114 H848" stroke="' + INK + '" stroke-width="1.2"></path>' +
+        line(620, 138, "ONE HUNDRED THANK YOUS", 12.5, 700, INK2, 300, "middle", SANS, 6) +
+
+        /* the message */
+        '<text x="620" y="180" text-anchor="middle" font-family="Bodoni Moda, Didot, serif" ' +
+          'font-weight="700" font-size="23" fill="' + INK + '">' +
+          '<tspan x="620" dy="0">A big thank you to my big brother</tspan>' +
+          '<tspan x="620" dy="33" font-size="30">CHRISTIAN</tspan>' +
+          '<tspan x="620" dy="31" font-size="21">and</tspan>' +
+          '<tspan x="620" dy="33" font-size="30">CLAUDE AI</tspan>' +
+          '<tspan x="620" dy="33">for helping me make this website.</tspan>' +
+        '</text>' +
+
+        /* microprinting */
+        line(392, 324, micro, 4.6, 400, INK2, 318, "start", MONO, 0.4) +
+
+        seal(880, 185, SEAL) +
+
+        /* signed by the account holder */
+        line(392, 368, "P.S. Cannon", 33, 700, INK, 0, "start") +
+        '<path d="M392 378 H706" stroke="' + INK + '" stroke-width="1"></path>' +
+        line(392, 392, "SOLE ACCOUNT HOLDER", 10, 700, INK2, 152, "start", SANS, 3) +
+        line(762, 392, "WORTH MORE THAN A HUNDRED DOLLARS", 8.5, 700, INK2, 196, "middle", SANS, 2) +
+
+        line(130, 372, "CN 0000006 A", 13, 500, INK, 128, "start", MONO, 2) +
+        line(846, 324, "CN 0000006 A", 13, 500, INK, 120, "end", MONO, 2) +
+      '</g>' +
+    '</svg>';
+  }
+
+  function corner100(cx, cy, ink, paper){
+    return '<circle cx="' + cx + '" cy="' + cy + '" r="31" fill="' + paper + '" opacity="0.85"></circle>' +
+      '<circle cx="' + cx + '" cy="' + cy + '" r="31" fill="none" stroke="' + ink + '" stroke-width="1.6"></circle>' +
+      '<circle cx="' + cx + '" cy="' + cy + '" r="26" fill="none" stroke="' + ink + '" stroke-width="0.7"></circle>' +
+      '<text x="' + cx + '" y="' + (cy + 11) + '" text-anchor="middle" font-family="Bodoni Moda, Didot, serif" ' +
+        'font-weight="700" font-size="30" textLength="42" lengthAdjust="spacingAndGlyphs" fill="' + ink + '">100</text>';
+  }
+
+  function seal(cx, cy, col){
+    var teeth = "";
+    for(var i = 0; i < 40; i++){
+      var a = (i / 40) * Math.PI * 2;
+      teeth += '<circle cx="' + (cx + Math.cos(a) * 45).toFixed(1) + '" cy="' + (cy + Math.sin(a) * 45).toFixed(1) +
+               '" r="2.6" fill="' + col + '" opacity="0.9"></circle>';
+    }
+    return teeth +
+      '<circle cx="' + cx + '" cy="' + cy + '" r="40" fill="none" stroke="' + col + '" stroke-width="2.2" opacity="0.92"></circle>' +
+      '<circle cx="' + cx + '" cy="' + cy + '" r="34" fill="none" stroke="' + col + '" stroke-width="0.8" opacity="0.92"></circle>' +
+      '<polyline points="' + guilloche(0, 0, 28, 9, 13, 460) + '" fill="none" stroke="' + col +
+        '" stroke-width="0.55" opacity="0.75" transform="translate(' + cx + ',' + cy + ')"></polyline>' +
+      '<text x="' + cx + '" y="' + (cy - 4) + '" text-anchor="middle" font-family="Public Sans, sans-serif" ' +
+        'font-weight="700" font-size="9.5" letter-spacing="1.6" textLength="48" lengthAdjust="spacing" fill="' + col + '">SAVINGS</text>' +
+      '<text x="' + cx + '" y="' + (cy + 9) + '" text-anchor="middle" font-family="Public Sans, sans-serif" ' +
+        'font-weight="700" font-size="9.5" letter-spacing="1.6" textLength="34" lengthAdjust="spacing" fill="' + col + '">FIRST</text>' +
+      '<text x="' + cx + '" y="' + (cy + 25) + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" ' +
+        'font-size="7.5" letter-spacing="1.4" textLength="46" lengthAdjust="spacing" fill="' + col + '">EST 2026</text>';
+  }
+
+  /* ----- undo: the only way back from a typo ----- */
+  function renderUndo(){
+    var btn = document.getElementById("undoBtn");
+    if(!btn) return;
+    if(!state.tx.length){ btn.hidden = true; return; }
+    var last = state.tx[state.tx.length - 1];
+    btn.hidden = false;
+    btn.textContent = "Undo: " + (last.kind === "out" ? "-" : last.kind === "move" ? "" : "+") +
+      fmt(last.amount) + " " + last.note;
+  }
+  document.getElementById("undoBtn").addEventListener("click", function(){
+    if(!state.tx.length) return;
+    var last = state.tx.pop();
+    if(last.kind === "interest") state.interestMonth = null;
+    if(last.note === "Allowance") state.allowance.last = null;
+    persist(); renderAll();
+    document.getElementById("entryMsg").textContent = "Undone: " + last.note + " " + fmt(last.amount) + ".";
+  });
+
+  /* ----- the most money he has ever had ----- */
+  function record(){
+    var tx = state.tx.slice().sort(function(a, b){ return a.ts - b.ts; });
+    var run = 0, best = 0, bestTs = null;
+    tx.forEach(function(t){
+      if(t.kind === "in" || t.kind === "interest") run += t.amount;
+      else if(t.kind === "out") run -= t.amount;
+      if(run > best){ best = run; bestTs = t.ts; }
+    });
+    return {amount: best, ts: bestTs};
+  }
+  function renderRecord(){
+    var el = document.getElementById("recordLine");
+    if(!el) return;
+    var r = record(), now = total(state.tx);
+    if(!r.amount){ el.textContent = ""; return; }
+    if(now >= r.amount){
+      el.innerHTML = '<span class="rec-flag">Record</span> This is the most money you have ever had.';
+    }else{
+      el.innerHTML = '<span class="rec-flag">Record</span> Your best ever was <b>' + fmt(r.amount) +
+        '</b> on ' + longDate(r.ts) + '. You are <b>' + fmt(r.amount - now) + '</b> away from beating it.';
+    }
+  }
+
+  /* ----- who owes Cannon money ----- */
+  function renderOwed(){
+    var box = document.getElementById("owedView");
+    var msg = document.getElementById("owedMsg");
+    var total = 0;
+    state.owed.forEach(function(o){ total += o.amount; });
+    document.getElementById("owedTotal").textContent = fmt(total);
+    var when = document.getElementById("owedWhen");
+    if(when) when.innerHTML = total
+      ? 'When everyone pays you back you will have <b>' + fmt(total + totalMoney(state.tx)) + '</b>.'
+      : '';
+
+    var slips = state.owed.slice().sort(function(a, b){ return a.ts - b.ts; }).map(function(o){
+      return '<div class="iou">' +
+        '<span class="iou-tag">I owe you</span>' +
+        '<div class="iou-row"><span class="iou-who">' + esc(o.who) + '</span>' +
+          '<span class="iou-amt">' + fmt(o.amount) + '</span></div>' +
+        '<span class="iou-when">since ' + longDate(o.ts) + '</span>' +
+        '<div class="iou-acts">' +
+          '<button class="btn primary iou-paid" type="button" data-paid="' + esc(o.id) + '">Paid me</button>' +
+          '<button class="btn iou-drop" type="button" data-drop="' + esc(o.id) + '" aria-label="Forget this one">Forget it</button>' +
+        '</div>' +
+      '</div>';
+    }).join("");
+
+    box.innerHTML =
+      (state.owed.length
+        ? '<div class="ious">' + slips + '</div>'
+        : '<p class="no-chart">Nobody owes you anything right now. Lucky them.</p>') +
+      '<div class="job-add">' +
+        '<div class="field"><label for="owWho">Who owes you?</label><input id="owWho" type="text" maxlength="24" placeholder="Zach"></div>' +
+        '<div class="field"><label for="owAmt">How much?</label><input id="owAmt" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00"></div>' +
+        '<button class="btn" id="owAdd" type="button">Write it down</button>' +
+      '</div>' +
+      '<div class="jar-pick"><span class="lbl">When they pay, put it in</span>' +
+        '<select id="owJar" aria-label="Which jar paid-back money goes into">' +
+          '<option value="spend"' + (state.owedJar === "spend" ? " selected" : "") + '>Spend</option>' +
+          '<option value="save"'  + (state.owedJar === "save"  ? " selected" : "") + '>Save</option>' +
+        '</select></div>';
+
+    Array.prototype.forEach.call(box.querySelectorAll("[data-paid]"), function(btn){
+      btn.addEventListener("click", function(){
+        var o = state.owed.filter(function(x){ return x.id === btn.getAttribute("data-paid"); })[0];
+        if(!o) return;
+        addTx({kind:"in", acct:state.owedJar, amount:o.amount, note:o.who + " paid me back"});
+        state.owed = state.owed.filter(function(x){ return x.id !== o.id; });
+        persist(); renderAll();
+        document.getElementById("owedMsg").textContent =
+          o.who + " paid you " + fmt(o.amount) + ". It is in your " + ACCT[state.owedJar] + " jar now.";
+      });
+    });
+    Array.prototype.forEach.call(box.querySelectorAll("[data-drop]"), function(btn){
+      btn.addEventListener("click", function(){
+        state.owed = state.owed.filter(function(x){ return x.id !== btn.getAttribute("data-drop"); });
+        persist(); renderAll();
+      });
+    });
+    box.querySelector("#owAdd").addEventListener("click", function(){
+      var who = box.querySelector("#owWho").value.trim().replace(/\s+/g, " ");
+      var amt = toCents(box.querySelector("#owAmt").value);
+      if(!who || !amt){ msg.textContent = "Put in a name and how much they owe you."; return; }
+      if(state.owed.length >= 60){ msg.textContent = "That is a lot of people. 60 is the max."; return; }
+      state.owed.push({id:"o" + Date.now().toString(36) + Math.random().toString(36).slice(2,6), who:who, amount:amt, ts:Date.now()});
+      msg.textContent = "";
+      persist(); renderAll();
+    });
+    box.querySelector("#owJar").addEventListener("change", function(e){
+      state.owedJar = e.target.value;
+      persist();
+    });
+  }
+
+  /* ----- goal ----- */
+  function renderGoal(){
+    var box = document.getElementById("goalView");
+    var b = balances(state.tx);
+    box.textContent = "";
+
+    if(!state.goal){
+      box.innerHTML =
+        '<p class="goal-line" style="margin-bottom:11px">Pick one thing you want. The bank does the math on how long it takes.</p>' +
+        '<div class="row2">' +
+          '<div class="field"><label for="gName">What is it?</label><input id="gName" type="text" maxlength="30" placeholder="baseball bat"></div>' +
+          '<div class="field"><label for="gCost">How much?</label><input id="gCost" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal"></div>' +
+        '</div>' +
+        '<button class="btn primary" id="gSet" type="button" style="margin-top:11px">Set my goal</button>';
+      box.querySelector("#gSet").addEventListener("click", function(){
+        var n = box.querySelector("#gName").value.trim();
+        var c = toCents(box.querySelector("#gCost").value);
+        if(!n || !c) return;
+        state.goal = {name:n, target:c, celebrated:false};
+        persist(); renderAll();
+      });
+      return;
+    }
+
+    var have = b.save, need = state.goal.target - have;
+    var pct = Math.max(0, Math.min(100, (have / state.goal.target) * 100));
+    var html = '<p class="goal-name">' + state.goal.name.replace(/[<>&]/g, "") + '</p>' +
+      '<p class="goal-line" style="margin:2px 0 10px"><b>' + fmt(state.goal.target) + '</b></p>' +
+      '<div class="bar" role="img" aria-label="' + Math.round(pct) + ' percent saved"><i style="width:' + pct.toFixed(1) + '%"></i></div>';
+
+    var spendable = b.spend;
+    if(need > 0 && spendable >= need){
+      html += '<p class="goal-line" style="margin-top:11px"><b>' + fmt(have) + '</b> saved &middot; <b>' + fmt(need) + '</b> to go</p>' +
+        '<p class="goal-line">You already have enough &mdash; it is just sitting in Spend. Move <b>' + fmt(need) + '</b> over and it is yours.</p>' +
+        '<button class="btn primary" id="gTopUp" type="button" style="margin-top:10px">Move ' + fmt(need) + ' into Save</button> ' +
+        '<button class="btn" id="gDrop" type="button" style="margin-top:10px">Different goal</button>';
+      box.innerHTML = html;
+      box.querySelector("#gTopUp").addEventListener("click", function(){
+        addTx({kind:"move", acct:"spend", to:"save", amount:need, note:"Saving up for " + state.goal.name});
+        persist(); renderAll();
+      });
+      box.querySelector("#gDrop").addEventListener("click", function(){
+        state.goal = null; persist(); renderAll();
+      });
+      return;
+    }
+
+    if(need <= 0){
+      html += '<p style="margin:12px 0 0"><span class="won">You did it!</span></p>' +
+        '<p class="goal-line" style="margin-top:9px">You have <b>' + fmt(have) + '</b> in Save. Tap the button when you actually buy it, and the bank takes it out for you.</p>' +
+        '<button class="btn primary" id="gBuy" type="button" style="margin-top:10px">I bought it</button> ' +
+        '<button class="btn" id="gDrop" type="button" style="margin-top:10px">New goal</button>';
+    }else{
+      var weeks = state.allowance.amount > 0 ? Math.ceil(need / state.allowance.amount) : null;
+      html += '<p class="goal-line" style="margin-top:11px"><b>' + fmt(have) + '</b> saved &middot; <b>' + fmt(need) + '</b> to go</p>';
+      html += weeks
+        ? '<p class="goal-line">At <b>' + fmt(state.allowance.amount) + '</b> of allowance a week, that is <b>' + weeks + '</b> more week' + (weeks === 1 ? "" : "s") + '.</p>'
+        : '<p class="goal-line">Set your allowance below and the bank will tell you how many weeks it takes.</p>';
+      html += '<button class="btn" id="gDrop" type="button" style="margin-top:10px">Pick a different goal</button>';
+    }
+    box.innerHTML = html;
+
+    var buy = box.querySelector("#gBuy");
+    if(buy) buy.addEventListener("click", buyGoal);
+    box.querySelector("#gDrop").addEventListener("click", function(){
+      state.goal = null; persist(); renderAll();
+    });
+  }
+
+  /* ----- allowance + booster ----- */
+  function allowanceDue(){
+    if(!state.allowance.amount) return false;
+    var today = new Date(); today.setHours(0,0,0,0);
+    var back = (today.getDay() - state.allowance.day + 7) % 7;
+    var payday = new Date(today.getTime() - back * 86400000);
+    return !state.allowance.last || state.allowance.last < dayKey(payday);
+  }
+  function nextPayday(){
+    var today = new Date(); today.setHours(0,0,0,0);
+    var fwd = (state.allowance.day - today.getDay() + 7) % 7;
+    if(fwd === 0) fwd = 7;
+    return {days: fwd, name: DAYS[state.allowance.day]};
+  }
+  function renderAllowance(){
+    var box = document.getElementById("allowView");
+    var b = balances(state.tx);
+    var interest = Math.round(b.save * state.rate / 100);
+    var canBoost = state.rate > 0 && interest > 0 && state.interestMonth !== monthKey(new Date());
+
+    var allowanceBlock;
+    if(!state.allowanceOn){
+      allowanceBlock =
+        '<p class="goal-line" style="margin:0">You do not get a regular allowance, so the bank is not asking about one. ' +
+        'Turn it on if that ever changes.</p>' +
+        '<button class="btn" id="aOn" type="button" style="margin-top:10px">I do get an allowance</button>';
+    }else{
+      var due = allowanceDue(), np = nextPayday();
+      var opts = DAYS.map(function(d, i){
+        return '<option value="' + i + '"' + (i === state.allowance.day ? " selected" : "") + '>' + d + '</option>';
+      }).join("");
+      allowanceBlock =
+        '<div class="row2">' +
+          '<div class="field"><label for="aAmt">Allowance</label>' +
+            '<input id="aAmt" type="number" min="0" step="0.01" inputmode="decimal" value="' +
+              (state.allowance.amount ? (state.allowance.amount / 100).toFixed(2) : "") + '" placeholder="0.00"></div>' +
+          '<div class="field"><label for="aDay">Every</label><select id="aDay">' + opts + '</select></div>' +
+        '</div>' +
+        '<p class="msg" style="margin-top:9px">' +
+          (state.allowance.amount
+            ? (due ? "Your allowance is ready to collect." : "Next allowance: " + np.name + ", in " + np.days + " day" + (np.days === 1 ? "" : "s") + ".")
+            : "Put in your allowance and the day you get it.") + '</p>' +
+        '<button class="btn primary" id="aCollect" type="button" style="width:100%"' + (due ? "" : " disabled") + '>' +
+          (state.allowance.amount ? "Collect " + fmt(state.allowance.amount) : "Collect allowance") + '</button>' +
+        '<button class="link" id="aOff" type="button" style="margin-top:10px">I don&rsquo;t get an allowance</button>';
+    }
+
+    box.innerHTML = allowanceBlock +
+      '<hr class="hr" style="margin:16px 0 13px">' +
+      '<div class="field"><label for="rate">Savings booster &mdash; grows your Save money every month</label>' +
+        '<input id="rate" type="number" min="0" max="50" step="0.5" inputmode="decimal" value="' + state.rate + '"></div>' +
+      '<p class="msg" style="margin-top:8px">' + fmt(b.save) + ' \u00d7 ' + state.rate + '% = <b>' + fmt(interest) + '</b> this month' +
+        (canBoost ? "" : (state.rate <= 0 ? " \u2014 booster is off" : interest <= 0 ? " \u2014 put money in Save first" : " \u2014 already added this month")) + '</p>' +
+      '<button class="btn" id="boost" type="button" style="width:100%;margin-top:4px"' + (canBoost ? "" : " disabled") + '>Add this month\u2019s booster</button>';
+
+    var on = box.querySelector("#aOn");
+    if(on) on.addEventListener("click", function(){
+      state.allowanceOn = true; persist(); renderAll();
+    });
+    var off = box.querySelector("#aOff");
+    if(off) off.addEventListener("click", function(){
+      state.allowanceOn = false;
+      state.allowance = {amount:0, day:6, last:null};
+      persist(); renderAll();
+    });
+    var amt = box.querySelector("#aAmt");
+    if(amt) amt.addEventListener("change", function(e){
+      state.allowance.amount = toCents(e.target.value); persist(); renderAll();
+    });
+    var day = box.querySelector("#aDay");
+    if(day) day.addEventListener("change", function(e){
+      state.allowance.day = Number(e.target.value); persist(); renderAll();
+    });
+    var collect = box.querySelector("#aCollect");
+    if(collect) collect.addEventListener("click", function(){
+      if(!allowanceDue()) return;
+      addTx({kind:"in", acct:"spend", amount:state.allowance.amount, note:"Allowance"});
+      state.allowance.last = dayKey(new Date());
+      persist(); renderAll();
+    });
+    box.querySelector("#rate").addEventListener("change", function(e){
+      state.rate = Math.min(50, Math.max(0, parseFloat(e.target.value) || 0));
+      persist(); renderAll();
+    });
+    box.querySelector("#boost").addEventListener("click", function(){
+      var amount = Math.round(balances(state.tx).save * state.rate / 100);
+      if(amount <= 0) return;
+      addTx({kind:"interest", acct:"save", amount:amount, note:"Savings booster"});
+      state.interestMonth = monthKey(new Date());
+      persist(); renderAll();
+    });
+  }
+
+  /* ----- ledger ----- */
+  function renderLedger(){
+    var wrap = document.getElementById("ledgerWrap");
+    if(!wrap) return;
+    if(!state.tx.length){
+      wrap.innerHTML = '<p class="no-chart">Nothing yet. Every time money comes in or goes out, write it down &mdash; that is the whole trick.</p>';
+      return;
+    }
+    var tx = state.tx.slice().sort(function(a,b){ return a.ts - b.ts; });
+    var run = 0, rows = [];
+    tx.forEach(function(t){
+      if(t.kind === "in" || t.kind === "interest") run += t.amount;
+      else if(t.kind === "out") run -= t.amount;
+      rows.push({t:t, bal:run});
+    });
+    rows.reverse();
+
+    var body = rows.map(function(r){
+      var t = r.t;
+      var where = t.kind === "move"
+        ? chip(t.acct) + ' <span class="chip">→</span> ' + chip(t.to)
+        : chip(t.acct);
+      var amtClass = t.kind === "out" ? "c-amt minus" : "c-amt";
+      var sign = t.kind === "out" ? "−" : t.kind === "move" ? "" : "+";
+      return '<tr>' +
+        '<td class="c-date">' + longDate(t.ts) + '</td>' +
+        '<td>' + String(t.note || "").replace(/[<>&]/g, "") + '</td>' +
+        '<td>' + where + '</td>' +
+        '<td class="' + amtClass + '">' + sign + fmt(t.amount).replace("$", "$") + '</td>' +
+        '<td class="c-bal">' + fmt(r.bal) + '</td>' +
+        '<td><button class="del" type="button" data-id="' + t.id + '" aria-label="Delete this entry">×</button></td>' +
+      '</tr>';
+    }).join("");
+
+    wrap.innerHTML =
+      '<table><caption>Newest first. The last column is all your money after that entry.</caption>' +
+      '<thead><tr><th>When</th><th>What</th><th>Jar</th><th class="c-amt">Amount</th><th class="c-bal">All my money</th><th></th></tr></thead>' +
+      '<tbody>' + body + '</tbody></table>';
+
+    Array.prototype.forEach.call(wrap.querySelectorAll(".del"), function(b){
+      b.addEventListener("click", function(){
+        var id = b.getAttribute("data-id");
+        state.tx = state.tx.filter(function(t){ return t.id !== id; });
+        persist(); renderAll();
+      });
+    });
+  }
+  function chip(a){
+    return '<span class="chip" style="--c:var(--' + a + ')"><i></i>' + ACCT[a] + '</span>';
+  }
+
+  /* ---------------- entries ---------------- */
+  function addTx(t){
+    t.id = "t" + Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+    t.ts = t.ts || Date.now();
+    state.tx.push(t);
+  }
+
+  var segButtons = document.querySelectorAll("#kindSeg button");
+  Array.prototype.forEach.call(segButtons, function(b){
+    b.addEventListener("click", function(){
+      kind = b.getAttribute("data-kind");
+      Array.prototype.forEach.call(segButtons, function(o){
+        o.setAttribute("aria-pressed", o === b ? "true" : "false");
+      });
+      var isMove = kind === "move";
+      document.getElementById("toField").hidden = !isMove;
+      document.getElementById("acctLbl").textContent = isMove ? "Out of" : "Which jar?";
+      document.getElementById("noteLbl").textContent = isMove ? "Why?" : (kind === "in" ? "Where did it come from?" : "What was it for?");
+      document.getElementById("note").placeholder = isMove ? "saving up" : (kind === "in" ? "mowed a lawn" : "baseball cards");
+      document.getElementById("submitBtn").textContent = isMove ? "Move the money" : (kind === "in" ? "Add money in" : "Take money out");
+    });
+  });
+
+  document.getElementById("entryForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var msg = document.getElementById("entryMsg");
+    var amount = toCents(document.getElementById("amt").value);
+    var note = document.getElementById("note").value.trim();
+    var acct = document.getElementById("acct").value;
+    var to = document.getElementById("acctTo").value;
+    if(!amount){ msg.textContent = "Type how much money first."; return; }
+
+    var b = balances(state.tx);
+    if(kind === "out" && amount > b[acct]){
+      msg.textContent = "Your " + ACCT[acct] + " jar only has " + fmt(b[acct]) + " in it.";
+      return;
+    }
+    if(kind === "move"){
+      if(acct === to){ msg.textContent = "Pick two different jars."; return; }
+      if(amount > b[acct]){ msg.textContent = "Your " + ACCT[acct] + " jar only has " + fmt(b[acct]) + " in it."; return; }
+    }
+
+    addTx({
+      kind: kind,
+      acct: acct,
+      to: kind === "move" ? to : undefined,
+      amount: amount,
+      note: note || (kind === "in" ? "Money in" : kind === "out" ? "Money out" : "Moved money")
+    });
+    document.getElementById("amt").value = "";
+    document.getElementById("note").value = "";
+    msg.textContent = kind === "move"
+      ? "Moved " + fmt(amount) + " from " + ACCT[acct] + " to " + ACCT[to] + "."
+      : (kind === "in" ? "Added " : "Took out ") + fmt(amount) + ".";
+    persist(); renderAll();
+  });
+
+  document.getElementById("startBtn").addEventListener("click", function(){
+    var amt = document.getElementById("amt");
+    amt.focus();
+    amt.scrollIntoView({block:"center", behavior:"smooth"});
+  });
+
+  /* ---------------- jump bar ---------------- */
+  (function(){
+    var nav = document.getElementById("nav");
+    var links = Array.prototype.slice.call(nav.querySelectorAll("a"));
+    var targets = links.map(function(a){ return document.getElementById(a.getAttribute("href").slice(1)); });
+    var ticking = false, current = -1, lockUntil = 0;
+    function setActive(pick){
+      if(pick === current) return;
+      current = pick;
+      links.forEach(function(a, i){
+        if(i === pick) a.setAttribute("aria-current","true");
+        else a.removeAttribute("aria-current");
+      });
+      var a = links[pick];
+      if(nav.scrollWidth > nav.clientWidth){
+        nav.scrollTo({left: a.offsetLeft - nav.clientWidth / 2 + a.clientWidth / 2, behavior: "smooth"});
+      }
+    }
+    links.forEach(function(a, i){
+      a.addEventListener("click", function(){
+        lockUntil = Date.now() + 1000;   // the tap wins until the scroll settles
+        setActive(i);
+      });
+    });
+    function update(){
+      ticking = false;
+      if(Date.now() < lockUntil) return;
+      var line = window.innerHeight * 0.38, pick = 0;
+      targets.forEach(function(t, i){ if(t && t.getBoundingClientRect().top <= line) pick = i; });
+      setActive(pick);
+    }
+    function onScroll(){ if(!ticking){ ticking = true; window.requestAnimationFrame(update); } }
+    window.addEventListener("scroll", onScroll, {passive:true});
+    window.addEventListener("resize", onScroll);
+    update();
+  })();
+
+
+  /* ----- the gate. A keep-out sign, not a safe: see the README. ----- */
+  var GATE_HASH = "d141e1a29ac9154e33a7990b7cfe9a9acf0344cf07f5b19e6e42fc7b16733896";
+  (function(){
+    var gate = document.getElementById("gate");
+    if(!gate) return;
+    var box = document.getElementById("gateBox");
+    var form = document.getElementById("gateForm");
+    var input = document.getElementById("gatePw");
+    var msg = document.getElementById("gateMsg");
+    var logo = document.getElementById("gateLogo");
+
+    function open(){
+      gate.hidden = true;
+      document.body.style.overflow = "";
+      try{ sessionStorage.setItem("boc.in", "1"); }catch(e){}
+    }
+    try{ if(sessionStorage.getItem("boc.in") === "1"){ open(); return; } }catch(e){}
+
+    document.body.style.overflow = "hidden";
+    setTimeout(function(){ try{ input.focus(); }catch(e){} }, 80);
+    setTimeout(function(){ if(logo && !logo.innerHTML) logo.innerHTML = logoSVG(true); }, 0);
+
+    async function sha256(text){
+      var buf = new TextEncoder().encode(text);
+      var hash = await crypto.subtle.digest("SHA-256", buf);
+      return Array.prototype.map.call(new Uint8Array(hash), function(b){
+        return b.toString(16).padStart(2, "0");
+      }).join("");
+    }
+
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      var tried = input.value;
+      if(!tried){ msg.textContent = "Type your password."; return; }
+      msg.textContent = "Checking\u2026";
+      sha256(tried).then(function(h){
+        if(h === GATE_HASH){ open(); }
+        else{
+          msg.textContent = "That is not it. Try again.";
+          input.value = "";
+          box.classList.remove("wrong"); void box.offsetWidth; box.classList.add("wrong");
+          input.focus();
+        }
+      }).catch(function(){
+        msg.textContent = "This browser cannot check the password here. Open the page over https.";
+      });
+    });
+  })();
+
+  /* ---------------- boot ---------------- */
+  var back = document.getElementById("backOut");
+  if(back && typeof window.__BANK_BACK__ === "string"){
+    back.href = window.__BANK_BACK__;
+    back.hidden = false;
+  }
+
+  /* An empty saved record must not beat the starting numbers - otherwise one visit
+     before the seed existed would leave this browser stuck on $0 forever. */
+  var saved = readLocal();
+  var savedHasSomething = saved && (saved.tx.length || saved.goal ||
+                                    saved.owed.length || saved.allowance.amount);
+  state = (savedHasSomething ? saved : null) ||
+          (window.__BANK_SEED__ ? sane(window.__BANK_SEED__) : null) ||
+          saved || emptyState();
+  drawBill();
+  var logoBox = document.getElementById("logo");
+  if(logoBox) logoBox.innerHTML = logoSVG(true);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(paintIcon);
+  else paintIcon();
+  flagStorage();
+  renderAll();
+  connect();
+})();
+</script>
+
+</body>
+</html>
