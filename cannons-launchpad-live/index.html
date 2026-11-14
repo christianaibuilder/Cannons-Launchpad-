@@ -10,9 +10,9 @@
 <body>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cannon’s Launchpad</title>
+<title>Cannon‚Äôs Launchpad</title>
 <meta name="description" content="Cannon is 9. Baseball, football, a rocket you can launch, and 25 photos. Throws hard. Dreams big.">
-<meta property="og:title" content="Cannon’s Launchpad">
+<meta property="og:title" content="Cannon‚Äôs Launchpad">
 <meta property="og:description" content="Cannon is 9. Baseball, football, a rocket you can launch, and 25 photos. Throws hard. Dreams big.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -211,7 +211,7 @@ const ROCKET = `<svg id="rocket" viewBox="0 0 24 62" aria-hidden="true">
 /* The whole page, written out once. */
 function page(photos){
   return `
-<div class="strip"><div class="wrap"><span>Cannon’s Launchpad</span><span class="go"><span class="dot"></span>Systems go</span></div></div>
+<div class="strip"><div class="wrap"><span>Cannon‚Äôs Launchpad</span><span class="go"><span class="dot"></span>Systems go</span></div></div>
 <header class="top"><div class="wrap">
   <h1 class="name" aria-label="Cannon"><span style="--i:0">C</span><span style="--i:1">A</span><span style="--i:2">N</span><span style="--i:3">N</span><span class="o" style="--i:4">O</span><span style="--i:5">N</span></h1>
   <p class="tagline">Throws hard. <em>Dreams big.</em></p>
@@ -242,12 +242,12 @@ function page(photos){
       <li><span>Baseball position</span>First base, pitcher, and outfield</li>
       <li><span>Football position</span>Offensive line, defensive line, and QB</li>
       <li class="pop wide"><span>Best sports moment</span>Winning the championship with my 10U Swag team</li>
-      <li class="wide"><span>I’m into</span>Rockets, engineering, AI, video games, and sports</li>
+      <li class="wide"><span>I‚Äôm into</span>Rockets, engineering, AI, video games, and sports</li>
       <li><span>Also into</span>Snowboarding, dirt bikes, golf, skateboarding</li>
       <li><span>Favorite food</span>Steak, medium rare</li>
       <li><span>Favorite video game</span>Spider-Man 2</li>
       <li><span>Favorite movie</span>Sonic the Hedgehog 3</li>
-      <li><span>Superpower I’d pick</span>Super speed</li>
+      <li><span>Superpower I‚Äôd pick</span>Super speed</li>
     </ul>
   </div></section>
 
@@ -257,7 +257,7 @@ function page(photos){
       <p class="built-eyebrow">My app</p>
       <p class="built-name">BANK OF CANNON</p>
       <p class="built-text">My own banking app, and I actually use it &mdash; this is my real money in here. Two jars, Spend and Save. A list of everybody who owes me money. A savings goal that tells me how many weeks I have left. And a chart of what I gained and lost every month of the year.</p>
-      <a class="launch built-go" href="bank/" target="_blank" rel="noopener">OPEN MY BANK</a>
+      <a class="launch built-go" href="bank/">OPEN MY BANK</a>
     </div>
   </div></section>
 
@@ -292,7 +292,7 @@ function page(photos){
     <div id="secretOpen" hidden>
       <p class="secret-eyebrow">Access granted</p>
       <h2 class="secret-title">Welcome, Cannon.</h2>
-      <p class="secret-text">The video couldn’t play here, so here’s the backup.</p>
+      <p class="secret-text">The video couldn‚Äôt play here, so here‚Äôs the backup.</p>
       <a class="launch secret-go" id="videoLink" href="#" target="_blank" rel="noopener">OPEN THE VIDEO</a>
       <p class="secret-small">It opens on tbwater.com at the 26-second mark.</p>
     </div>
@@ -300,7 +300,7 @@ function page(photos){
   <div class="scan" id="secretScan" hidden aria-hidden="true">
     <div class="scan-line"></div>
     <div class="scan-frame"><i></i><i></i><i></i><i></i></div>
-    <p class="scan-text" id="scanText">SCANNING…</p>
+    <p class="scan-text" id="scanText">SCANNING‚Ä¶</p>
   </div>
 </div>
 
@@ -311,7 +311,7 @@ function page(photos){
 </div>
 
 <footer><div class="wrap">
-  <p class="foot-name">Cannon’s Launchpad</p>
+  <p class="foot-name">Cannon‚Äôs Launchpad</p>
   <p>Built by Cannon with his big brother Christian, and an AI helper.</p>
   <p>Made for his friends. Especially Zach. 2026.</p>
 </div></footer>`;
@@ -350,7 +350,7 @@ function wireSecret(){
   function runScan(){
     /* 1. hide everything but the background, 2. sweep the green light twice, 3. open the video */
     box.hidden = true; xBtn.hidden = true;
-    scanText.textContent = 'SCANNING…';
+    scanText.textContent = 'SCANNING‚Ä¶';
     scan.hidden = false;
     const line = scan.querySelector('.scan-line'); line.style.animation = 'none'; void line.offsetWidth; line.style.animation = '';
     const step = calm ? 300 : 1300;
@@ -482,7 +482,7 @@ function wireLaunch(){
   let count = 0, busy = false, last = -1;
   try { count = parseInt(localStorage.getItem('cannonLaunches') || '0', 10) || 0; } catch (e) {}
   if (count) out.textContent = 'LAUNCHES: ' + count;
-  const done = label => { out.textContent = 'LAUNCHES: ' + count + (label ? ' · ' + label : ''); btn.disabled = false; busy = false; };
+  const done = label => { out.textContent = 'LAUNCHES: ' + count + (label ? ' ¬∑ ' + label : ''); btn.disabled = false; busy = false; };
 
   function puff(){
     /* a little smoke cloud wherever the rocket is right now, so you can see the path */
